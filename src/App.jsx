@@ -1,9 +1,30 @@
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+// Layouts
+import RootLayout from "./layouts/RootLayout";
+// Pages
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Classes from "./pages/Classes";
+import Instructors from "./pages/Instructors";
 const App = () => {
-  return (
-    <div>
-      <h3>Hello world</h3>
-    </div>
+  const router = createBrowserRouter(
+    createRoutesFromElements([
+      <Route>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="classes" element={<Classes />} />
+          <Route path="/instructors" element={<Instructors />} />
+        </Route>
+      </Route>,
+    ])
   );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
