@@ -14,6 +14,26 @@ const navOptions = (
         Classes
       </NavLink>
     </li>
+    <li className="dropdown dropdown-hover">
+      <label tabIndex={0} className="nav-item">
+        Dashboard
+      </label>
+      <ul
+        tabIndex={0}
+        className="dropdown-content nav menu p-4 shadow glass rounded-box w-44 space-y-2"
+      >
+        <li>
+          <NavLink className="nav-item" to="/dashboard/my-selected-classes">
+            My Selected Classes
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className="nav-item" to="/dashboard/my-enrolled-classes">
+            My Enrolled Classes
+          </NavLink>
+        </li>
+      </ul>
+    </li>
     <li>
       <NavLink className="nav-item" to="/instructors">
         Instructors

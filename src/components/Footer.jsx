@@ -19,10 +19,15 @@ const Footer = () => {
           <a className="link link-hover">Press kit</a>
         </div>
         <div>
-          <span className="footer-title">Legal</span>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
+          <span className="footer-title">Address</span>
+          <a className="link link-hover">634 Campbell St,</a>
+          <a className="link link-hover">Tofinno BC</a>
+          <a className="link link-hover font-semibold">
+            <span className="font-bold">P :</span> 774 4567333
+          </a>
+          <a className="link link-hover font-semibold">
+            <span className="font-bold">E :</span> rhymove@gmail.com
+          </a>
         </div>
       </footer>
       <footer className="footer lg:px-10 px-4 py-4 bg-gradient-to-r from-white to-blue-100 border-t text-base-content border-base-300">
@@ -76,6 +81,9 @@ const Footer = () => {
           </div>
         </div>
       </footer>
+      <p className="footer-center p-4 text-base-content bg-gradient-to-r from-white to-blue-100">
+        Copyright © 2023 - All right reserved by ACME Industries Ltd
+      </p>
     </div>
   );
 };

@@ -13,6 +13,9 @@ import Classes from "./pages/Classes";
 import Instructors from "./pages/Instructors";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./layouts/Dashboard";
+import SelectedClasses from "./pages/dashboard/Students/SelectedClasses";
+import EnrolledClasses from "./pages/dashboard/Students/EnrolledClasses";
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements([
@@ -20,9 +23,13 @@ const App = () => {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="register" element={<Register />} />
           <Route path="classes" element={<Classes />} />
-          <Route path="/instructors" element={<Instructors />} />
+          <Route path="instructors" element={<Instructors />} />
+        </Route>
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route path="my-selected-classes" element={<SelectedClasses />} />
+          <Route path="my-enrolled-classes" element={<EnrolledClasses />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>,
