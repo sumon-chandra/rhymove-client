@@ -30,9 +30,8 @@ const Login = () => {
 
   // !! Login with Google
   const handleGoogleLogin = () => {
-    signInWithGoogle().then((result) => {
-      const loggedUser = result.user;
-      const user = { name: loggedUser.displayName, email: loggedUser.email };
+    signInWithGoogle().then(() => {
+      navigate(from);
     });
   };
 

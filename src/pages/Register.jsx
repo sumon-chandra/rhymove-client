@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import loginImg from "../assets/signup_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
 const Register = () => {
   const { signInWithGoogle, userInfo, createNewUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -22,6 +23,11 @@ const Register = () => {
   const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
   const img_hosing_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
   const handleRegister = (data) => {
+    console.log(data);
+    setError("");
+    if (data.password !== data.confirmPassword) {
+      setError("Passwords do not match");
+    }
     createNewUser(data.email, data.password).then(() => {
       const formData = new FormData();
       formData.append("image", data.image[0]);
@@ -68,7 +74,6 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  required
                   {...register("name", { required: true })}
                   placeholder="Enter Your Name"
                   className="input input-bordered"
@@ -85,7 +90,6 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
-                  required
                   {...register("email", { required: true })}
                   placeholder="Enter Your Email"
                   className="input input-bordered"
@@ -122,6 +126,26 @@ const Register = () => {
                 )}
               </div>
               <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-bold text-xl">
+                    Confirm Password
+                  </span>
+                </label>
+                <input
+                  type="password"
+                  {...register("confirmPassword", {
+                    required: true,
+                  })}
+                  placeholder="Enter Your Password"
+                  className="input input-bordered"
+                />
+                {errors.password?.type === "required" && (
+                  <span className="text-red-400 text-xs font-semibold mt-2">
+                    This field is required.
+                  </span>
+                )}
+              </div>
+              <div className="form-control">
                 <input
                   {...register("image", { required: true })}
                   type="file"
@@ -136,8 +160,14 @@ const Register = () => {
                   <span>Add profile picture.</span>
                 </label>
               </div>
+              {error && (
+                <span className="text-red-400 text-xs font-semibold mt-2">
+                  {error}
+                </span>
+              )}
               <div className="form-control mt-6">
                 <input
+                  disabled={error}
                   type="submit"
                   value="Register"
                   className="btn btn-sm lg:btn-md bg-priColor hover:bg-secColor normal-case border-0 text-white lg:text-xl shadow-lg"

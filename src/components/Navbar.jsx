@@ -50,7 +50,7 @@ const Navbar = () => {
     });
   };
   return (
-    <div className="navbar p-0 px-4 fixed glass">
+    <div className="navbar p-0 px-4 fixed glass z-30">
       <div className="navbar-start">
         <div className="dropdown">
           <label
