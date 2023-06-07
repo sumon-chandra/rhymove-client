@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Classes from "./pages/Classes";
 import Instructors from "./pages/Instructors";
 import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements([
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="classes" element={<Classes />} />
           <Route path="/instructors" element={<Instructors />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>,
     ])
   );
