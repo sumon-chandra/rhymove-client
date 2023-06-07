@@ -46,9 +46,11 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
-        <div className="lg:text-2xl text-lg ms-4 flex items-center font-K2D cursor-pointer select-none">
+        <div className="lg:text-2xl text-lg lg:ms-0 ms-4 flex items-center font-K2D cursor-pointer select-none">
           <img src={logo} className="w-10" alt="" />
-          <span className="font-black">Rhymove</span>
+          <div className="font-black">
+            <span>Rhymove</span> <p className="text-xs">Dance School</p>
+          </div>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
