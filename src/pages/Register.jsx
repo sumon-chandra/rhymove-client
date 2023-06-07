@@ -3,11 +3,10 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { FaFacebook, FaGoogle, FaGithub } from "react-icons/fa";
-// import bg from "../assets/others/pattern.png";
-import loginImg from "../assets/login_bg.svg";
+import { FaGoogle } from "react-icons/fa";
+import loginImg from "../assets/signup_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
-const Login = () => {
+const Register = () => {
   const { loginUser, signInWithGoogle, loadJWT } = useContext(AuthContext);
   const {
     register,
@@ -20,7 +19,7 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   // !! Handle Sign in
-  const handleLogin = (data) => {
+  const handleRegister = (data) => {
     // loginUser(data.email, data.password).then((res) => {
     //   loadJWT(res.user);
     //   reset();
@@ -42,11 +41,28 @@ const Login = () => {
         <div className="lg:w-1200 mx-auto px-4 lg:px-0 min-h-screen bg-transparent">
           <div className="lg:flex justify-evenly items-center gap-x-10">
             <form
-              onSubmit={handleSubmit(handleLogin)}
+              onSubmit={handleSubmit(handleRegister)}
               className="card-body font-inter bg-white"
             >
               <div className="text-center">
-                <h4 className="text-3xl font-bold">Login</h4>
+                <h4 className="text-3xl font-bold">Register</h4>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-bold text-xl">Name</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  {...register("name", { required: true })}
+                  placeholder="Enter Your Name"
+                  className="input input-bordered"
+                />
+                {errors.name && (
+                  <span className="text-red-400 text-xs font-semibold mt-2">
+                    This field is required
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -71,23 +87,24 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  {...register("password", { required: true })}
+                  {...register("password", {
+                    required: true,
+                    pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/,
+                  })}
                   placeholder="Enter Your Password"
                   className="input input-bordered"
                 />
-                {errors.name && (
+                {errors.password?.type === "required" && (
                   <span className="text-red-400 text-xs font-semibold mt-2">
-                    This field is required
+                    This field is required.
                   </span>
                 )}
-                <label className="label">
-                  <a
-                    href="#"
-                    className="label-text-alt link link-hover font-semibold"
-                  >
-                    Forgot password?
-                  </a>
-                </label>
+                {errors.password?.type === "pattern" && (
+                  <span className="text-red-400 text-xs font-semibold mt-2">
+                    Password must contain at least 6 character and one uppercase
+                    letter and one special character.
+                  </span>
+                )}
               </div>
               <div className="form-control mt-6">
                 <input
@@ -98,16 +115,16 @@ const Login = () => {
               </div>
               <div className="text-xs text-primaryColor">
                 <p className="font-semibold">
-                  New here?{" "}
-                  <Link to="/register" className="font-bold underline">
-                    Create a new account
+                  Already have an account?{" "}
+                  <Link to="/login" className="font-bold underline">
+                    Login now
                   </Link>
                 </p>
                 <div
                   onClick={handleGoogleLogin}
-                  className="bg-slate-200 lg:text-xl font-semibold select-none cursor-pointer flex justify-center items-center gap-2 mt-6 lg:w-4/6 rounded-2xl py-1 mx-auto"
+                  className="bg-slate-200 font-semibold lg:text-xl select-none cursor-pointer flex justify-center items-center gap-2 mt-6 w-4/6 rounded-2xl py-1 mx-auto"
                 >
-                  <span>Or login with google</span>
+                  <span>Or register with google</span>
                   <FaGoogle className="cursor-pointer" />
                 </div>
               </div>
@@ -124,4 +141,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

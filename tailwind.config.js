@@ -9,6 +9,10 @@ export default {
       },
       fontFamily: {
         K2D: "K2D",
+        inter: "Inter",
+      },
+      width: {
+        1200: "1200px",
       },
     },
   },
