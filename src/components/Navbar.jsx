@@ -1,6 +1,7 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import logo from "../assets/logo.png";
+import useAuth from "../hooks/useAuth";
 const navOptions = (
   <>
     <li>
@@ -21,6 +22,13 @@ const navOptions = (
   </>
 );
 const Navbar = () => {
+  const { user, logoutUser } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logoutUser().then(() => {
+      navigate("/login");
+    });
+  };
   return (
     <div className="navbar p-0 px-4 fixed glass">
       <div className="navbar-start">
@@ -47,12 +55,33 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 nav gap-4">{navOptions}</ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to="/login"
-          className="btn-sm pt-1 rounded-lg  bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
-        >
-          Login
-        </Link>
+        {user ? (
+          <>
+            {" "}
+            <button
+              onClick={handleLogout}
+              className="btn-sm rounded-lg  bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link
+            to="/login"
+            className="btn-sm pt-1 rounded-lg  bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
+          >
+            Login
+          </Link>
+        )}
+        {user && (
+          <button className="btn btn-ghost rounded-full">
+            <img
+              src={user.photoURL}
+              className="w-10 h-10 rounded-full object-cover"
+              alt="user photo"
+            />{" "}
+          </button>
+        )}
       </div>
     </div>
   );

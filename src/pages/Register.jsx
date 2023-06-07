@@ -3,11 +3,11 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaImages } from "react-icons/fa";
 import loginImg from "../assets/signup_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
 const Register = () => {
-  const { loginUser, signInWithGoogle, loadJWT } = useContext(AuthContext);
+  const { signInWithGoogle, userInfo, createNewUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -18,26 +18,41 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  // !! Handle Sign in
+  // !! Handle Register
+  const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
+  const img_hosing_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
   const handleRegister = (data) => {
-    // loginUser(data.email, data.password).then((res) => {
-    //   loadJWT(res.user);
-    //   reset();
-    //   navigate(from);
-    // });
+    createNewUser(data.email, data.password).then(() => {
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
+      fetch(img_hosing_url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then(({ data }) => {
+          const photoURL = data.display_url;
+          userInfo(data.name, photoURL).then(() => {});
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      reset();
+      navigate(from);
+    });
   };
 
   // !! Login with Google
   const handleGoogleLogin = () => {
-    // signInWithGoogle().then((result) => {
-    //   const loggedUser = result.user;
-    //   const user = { name: loggedUser.displayName, email: loggedUser.email };
-    // });
+    signInWithGoogle().then((result) => {
+      const loggedUser = result.user;
+      const user = { name: loggedUser.displayName, email: loggedUser.email };
+    });
   };
 
   return (
     <>
-      <section className="lg:pt-20 pt-10">
+      <section className=" pt-10">
         <div className="lg:w-1200 mx-auto px-4 lg:px-0 min-h-screen bg-transparent">
           <div className="lg:flex justify-evenly items-center gap-x-10">
             <form
@@ -106,10 +121,25 @@ const Register = () => {
                   </span>
                 )}
               </div>
+              <div className="form-control">
+                <input
+                  {...register("image", { required: true })}
+                  type="file"
+                  id="file"
+                  className="w-[0.0001px]"
+                />
+                <label
+                  htmlFor="file"
+                  className="border-2 rounded-lg p-4 flex items-center gap-2"
+                >
+                  <FaImages />
+                  <span>Add profile picture.</span>
+                </label>
+              </div>
               <div className="form-control mt-6">
                 <input
                   type="submit"
-                  value="Sign in"
+                  value="Register"
                   className="btn btn-sm lg:btn-md bg-priColor hover:bg-secColor normal-case border-0 text-white lg:text-xl shadow-lg"
                 />
               </div>
@@ -122,7 +152,7 @@ const Register = () => {
                 </p>
                 <div
                   onClick={handleGoogleLogin}
-                  className="bg-slate-200 font-semibold lg:text-xl select-none cursor-pointer flex justify-center items-center gap-2 mt-6 w-4/6 rounded-2xl py-1 mx-auto"
+                  className="bg-slate-200 font-semibold text-sm select-none cursor-pointer flex justify-center items-center gap-2 mt-6 w-4/6 rounded-2xl py-1 mx-auto"
                 >
                   <span>Or register with google</span>
                   <FaGoogle className="cursor-pointer" />

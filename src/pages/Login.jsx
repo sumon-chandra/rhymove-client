@@ -21,19 +21,19 @@ const Login = () => {
 
   // !! Handle Sign in
   const handleLogin = (data) => {
-    // loginUser(data.email, data.password).then((res) => {
-    //   loadJWT(res.user);
-    //   reset();
-    //   navigate(from);
-    // });
+    loginUser(data.email, data.password).then((res) => {
+      loadJWT(res.user);
+      reset();
+      navigate(from);
+    });
   };
 
   // !! Login with Google
   const handleGoogleLogin = () => {
-    // signInWithGoogle().then((result) => {
-    //   const loggedUser = result.user;
-    //   const user = { name: loggedUser.displayName, email: loggedUser.email };
-    // });
+    signInWithGoogle().then((result) => {
+      const loggedUser = result.user;
+      const user = { name: loggedUser.displayName, email: loggedUser.email };
+    });
   };
 
   return (
@@ -92,7 +92,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 <input
                   type="submit"
-                  value="Sign in"
+                  value="Login"
                   className="btn btn-sm lg:btn-md bg-priColor hover:bg-secColor normal-case border-0 text-white lg:text-xl shadow-lg"
                 />
               </div>
@@ -105,7 +105,7 @@ const Login = () => {
                 </p>
                 <div
                   onClick={handleGoogleLogin}
-                  className="bg-slate-200 lg:text-xl font-semibold select-none cursor-pointer flex justify-center items-center gap-2 mt-6 lg:w-4/6 rounded-2xl py-1 mx-auto"
+                  className="bg-slate-200 text-sm font-semibold select-none cursor-pointer flex justify-center items-center gap-2 mt-6 lg:w-4/6 rounded-2xl py-1 mx-auto"
                 >
                   <span>Or login with google</span>
                   <FaGoogle className="cursor-pointer" />

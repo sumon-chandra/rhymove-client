@@ -9,8 +9,8 @@ import {
   updateProfile,
   signInWithPopup,
 } from "firebase/auth";
-import { auth } from "./../firebase/firebase.config";
 import axios from "axios";
+import { auth } from "./../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 
@@ -46,9 +46,10 @@ const AuthProvider = ({ children }) => {
   };
 
   // Get user info
-  const userInfo = (name) => {
+  const userInfo = (name, photoURL) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
+      photoURL,
     });
   };
 
