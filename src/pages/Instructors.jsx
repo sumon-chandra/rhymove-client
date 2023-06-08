@@ -12,7 +12,7 @@ const Instructors = () => {
   }, []);
   return (
     <section className="section">
-      <SectionTitle value="Our Instructors" />
+      <SectionTitle value="Our Instructors!" />
       <div className="lg:grid grid-cols-3 place-items-center gap-x-10 gap-y-20">
         {instructors.map((instructor, index) => (
           <InstructorCard
