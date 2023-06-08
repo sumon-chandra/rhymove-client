@@ -8,6 +8,9 @@
 
 /* !!!!!!!!! Layer Components !!!!!! */
 @layer components {
+    .section {
+        @apply lg:w-1200 mx-auto px-4 lg:px-0 lg:mt-20 mt-8
+    }
     .nav-item{
         @apply bg-transparent hover:bg-transparent rounded-none p-0 lg:pb-2 font-semibold
     }

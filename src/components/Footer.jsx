@@ -2,8 +2,8 @@ import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <div>
-      <footer className="footer p-10 bg-gradient-to-r from-white to-blue-100 text-base-content">
+    <div className="bg-gradient-to-r from-white to-blue-100">
+      <footer className="footer lg:w-1200 mx-auto p-10  text-base-content">
         <div>
           <span className="footer-title">Services</span>
           <a className="link link-hover">Branding</a>
@@ -30,7 +30,7 @@ const Footer = () => {
           </a>
         </div>
       </footer>
-      <footer className="footer lg:px-10 px-4 py-4 bg-gradient-to-r from-white to-blue-100 border-t text-base-content border-base-300">
+      <footer className="footer lg:w-1200 mx-auto lg:px-10 px-4 py-4 border-t text-base-content border-base-300">
         <div className=" grid-flow-col space-x-4 flex lg:flex-row flex-col">
           <div className="lg:text-2xl text-lg flex items-center font-K2D cursor-pointer select-none">
             <img src={logo} className="w-10" alt="" />
@@ -81,7 +81,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <p className="footer-center p-4 text-base-content bg-gradient-to-r from-white to-blue-100">
+      <p className="footer-center p-4 text-base-content">
         Copyright © 2023 - All right reserved by ACME Industries Ltd
       </p>
     </div>

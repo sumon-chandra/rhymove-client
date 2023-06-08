@@ -20,7 +20,7 @@ const navOptions = (
       </label>
       <ul
         tabIndex={0}
-        className="dropdown-content nav menu p-4 shadow glass rounded-box w-44 space-y-2"
+        className="dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
       >
         <li>
           <NavLink className="nav-item" to="/dashboard/my-selected-classes">

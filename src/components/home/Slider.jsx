@@ -13,7 +13,7 @@ const Slider = () => {
         centeredSlides={true}
         loop={true}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -26,7 +26,7 @@ const Slider = () => {
           <div className="flex justify-between items-center lg:px-32 px-4">
             <div className="w-1/2">
               <h2 className="lg:text-[130px] lg:leading-[150px] font-bold">
-                Best <br /> Dance <br /> Studio
+                Best <br /> Dance <br /> Studio!
               </h2>
               <div className="flex items-end gap-2 lg:mt-14 mt-6">
                 <img src={arrow} alt="" className="lg:w-20 w-6" />
@@ -44,7 +44,7 @@ const Slider = () => {
           <div className="flex justify-between items-center lg:px-32 px-4">
             <div className="w-1/2">
               <h2 className="lg:text-[130px] lg:leading-[150px] font-bold">
-                World <br /> Class <br /> Instructors
+                World <br /> Class <br /> Instructors!
               </h2>
               <div className="flex items-end gap-2 lg:mt-14 mt-6">
                 <img src={arrow} alt="" className="lg:w-20 w-6" />
