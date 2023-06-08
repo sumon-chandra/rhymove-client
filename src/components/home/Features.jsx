@@ -16,7 +16,7 @@ const Features = () => {
         </h3>
         <div className="lg:space-y-24 space-y-20 relative">
           <div className="lg:flex items-end gap-10 lg:relative right-24">
-            <div className="lg:w-[30rem] bg-white px-9 py-14">
+            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
               <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <MdOutlineEventSeat />
               </div>
@@ -38,7 +38,7 @@ const Features = () => {
               alt=""
               className="rotate-90 w-20 hidden lg:block"
             />
-            <div className="lg:w-[30rem] bg-white px-9 py-14">
+            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
               <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <GiGuitar />
               </div>
@@ -50,7 +50,7 @@ const Features = () => {
             </div>
           </div>
           <div className="lg:flex items-end gap-10 lg:relative right-24">
-            <div className="lg:w-[30rem] bg-white px-9 py-14">
+            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
               <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <MdOutlineSportsGymnastics />
               </div>
