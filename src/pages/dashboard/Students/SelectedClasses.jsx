@@ -3,7 +3,10 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/sections/SectionTitle";
 import ClassCard from "../../../components/cards/ClassCard";
+import PaymentModal from "../../../components/PaymentModal";
+import { useState } from "react";
 const SelectedClasses = () => {
+  const [selectedItemToPay, setSelectedItemToPay] = useState({});
   const { data: classes = [], refetch } = useQuery({
     queryKey: ["selected-class"],
     queryFn: async () => {
@@ -24,11 +27,14 @@ const SelectedClasses = () => {
               item={item}
               key={item._id}
               isSelected={true}
+              setSelectedItemToPay={setSelectedItemToPay}
               refetch={refetch}
             />
           ))}
         </div>
       </section>
+      {/* !!!!!!!!!!!!!!!!! ******** Modal *********** !!!!!!!!!!!!!! */}
+      <PaymentModal selectedItemToPay={selectedItemToPay} />
     </>
   );
 };

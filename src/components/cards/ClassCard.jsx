@@ -1,8 +1,9 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import PaymentModal from "../PaymentModal";
 
-const ClassCard = ({ item, isSelected, refetch }) => {
+const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
   const { user } = useAuth();
   const handleSelectClass = (selectItem) => {
     Swal.fire({
@@ -60,6 +61,7 @@ const ClassCard = ({ item, isSelected, refetch }) => {
       }
     });
   };
+  const handlePay = (item) => {};
   return (
     <div
       className={
@@ -94,16 +96,16 @@ const ClassCard = ({ item, isSelected, refetch }) => {
         </p>
         {isSelected ? (
           <div className="flex justify-between items-center gap-10">
-            <button
-              // onClick={() => handleSelectClass(item)}
-              // disabled={item?.availableSeats === 0}
-              className="btn-sm bg-priColor w-1/2 mx-auto text-white disabled:bg-gray-400"
+            <label
+              htmlFor="payModal"
+              onClick={() => setSelectedItemToPay(item)}
+              className="btn-sm pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
             >
               Pay
-            </button>
+            </label>
             <button
               onClick={() => handleDelete(item)}
-              className="btn-sm bg-red-500 w-1/2 mx-auto text-white disabled:bg-gray-400"
+              className="btn-sm bg-red-500 w-1/2 mx-auto text-white"
             >
               Delete
             </button>
@@ -118,6 +120,8 @@ const ClassCard = ({ item, isSelected, refetch }) => {
           </button>
         )}
       </div>
+      {/* !!!!!!!!!!!!!!!!! ******** Modal *********** !!!!!!!!!!!!!!
+      <PaymentModal /> */}
     </div>
   );
 };
