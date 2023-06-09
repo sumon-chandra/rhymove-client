@@ -11,7 +11,6 @@ const SelectedClasses = () => {
       return response.data;
     },
   });
-  console.log(classes);
   return (
     <>
       <Helmet>
@@ -21,7 +20,12 @@ const SelectedClasses = () => {
         <SectionTitle value="My Selected Classes!" />
         <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
           {classes?.map((item) => (
-            <ClassCard item={item} key={item._id} isSelected={true} />
+            <ClassCard
+              item={item}
+              key={item._id}
+              isSelected={true}
+              refetch={refetch}
+            />
           ))}
         </div>
       </section>

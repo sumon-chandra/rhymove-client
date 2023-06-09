@@ -2,7 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
-const ClassCard = ({ item, isSelected }) => {
+const ClassCard = ({ item, isSelected, refetch }) => {
   const { user } = useAuth();
   const handleSelectClass = (selectItem) => {
     Swal.fire({
@@ -32,6 +32,29 @@ const ClassCard = ({ item, isSelected }) => {
                 "Your class has been selected.",
                 "success"
               );
+            }
+          });
+      }
+    });
+  };
+
+  // !!!!!!!!!!!!!! When student selected a class then Delete and Pay buttons will be executed.
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/selected-class/${item._id}`)
+          .then(({ data }) => {
+            if (data.deletedCount) {
+              Swal.fire("Deleted!", "Your class has been deleted.", "success");
+              refetch();
             }
           });
       }
@@ -79,8 +102,7 @@ const ClassCard = ({ item, isSelected }) => {
               Pay
             </button>
             <button
-              // onClick={() => handleSelectClass(item)}
-              // disabled={item?.availableSeats === 0}
+              onClick={() => handleDelete(item)}
               className="btn-sm bg-red-500 w-1/2 mx-auto text-white disabled:bg-gray-400"
             >
               Delete
