@@ -5,6 +5,7 @@ import useAuth from "./useAuth";
 const useAdmin = () => {
   const { user, loading } = useAuth();
   const admin = JSON.parse(sessionStorage.getItem("isAdmin"));
+  console.log(admin);
   const [axiosSecure] = useAxiosSecure();
   const token = localStorage.getItem("JWT");
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
@@ -15,9 +16,11 @@ const useAdmin = () => {
         return false;
       }
       if (admin) {
+        console.log("Hello");
         return true;
       }
       const res = await axiosSecure.get(`/users/admin/${user?.email}`);
+      console.log("Response: ", res);
       sessionStorage.setItem("isAdmin", res.data.admin);
       return res.data.admin;
     },

@@ -5,12 +5,18 @@ import SectionTitle from "../../../components/sections/SectionTitle";
 import ClassCard from "../../../components/cards/ClassCard";
 import PaymentModal from "../../../components/PaymentModal";
 import { useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 const SelectedClasses = () => {
+  const [axiosSecure] = useAxiosSecure();
+  const { user } = useAuth();
   const [selectedItemToPay, setSelectedItemToPay] = useState({});
   const { data: classes = [], refetch } = useQuery({
     queryKey: ["selected-class"],
     queryFn: async () => {
-      const response = await axios("http://localhost:5000/selected-class");
+      const response = await axiosSecure.get(
+        `/selected-class?email=${user?.email}`
+      );
       return response.data;
     },
   });

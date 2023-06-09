@@ -18,6 +18,7 @@ import Dashboard from "./layouts/Dashboard";
 import SelectedClasses from "./pages/dashboard/Students/SelectedClasses";
 import EnrolledClasses from "./pages/dashboard/Students/EnrolledClasses";
 import ManageUser from "./pages/dashboard/admin/ManageUser";
+import ManageClasses from "./pages/dashboard/admin/ManageClasses";
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements([
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="my-selected-classes" element={<SelectedClasses />} />
           <Route path="my-enrolled-classes" element={<EnrolledClasses />} />
           <Route path="manage-users" element={<ManageUser />} />
+          <Route path="manage-classes" element={<ManageClasses />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>,

@@ -7,6 +7,7 @@ import { FaFacebook, FaGoogle, FaGithub } from "react-icons/fa";
 // import bg from "../assets/others/pattern.png";
 import loginImg from "../assets/login_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
+import axios from "axios";
 const Login = () => {
   const { loginUser, signInWithGoogle, loadJWT } = useContext(AuthContext);
   const {

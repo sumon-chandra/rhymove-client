@@ -2,51 +2,74 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
-const navOptions = (
-  <>
-    <li>
-      <NavLink className="nav-item" to="/">
-        Home
-      </NavLink>
-    </li>
-    <li>
-      <NavLink className="nav-item" to="/classes">
-        Classes
-      </NavLink>
-    </li>
-    <li className="dropdown dropdown-hover">
-      <label tabIndex={0} className="nav-item">
-        Dashboard
-      </label>
-      <ul
-        tabIndex={0}
-        className="dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
-      >
-        <li>
-          <NavLink className="nav-item" to="/dashboard/my-selected-classes">
-            My Selected Classes
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="nav-item" to="/dashboard/my-enrolled-classes">
-            My Enrolled Classes
-          </NavLink>
-        </li>
-        {/* <li>
-          <NavLink className="nav-item" to="/dashboard/manage-users">
-            Manage Users
-          </NavLink>
-        </li> */}
-      </ul>
-    </li>
-    <li>
-      <NavLink className="nav-item" to="/instructors">
-        Instructors
-      </NavLink>
-    </li>
-  </>
-);
+import useAdmin from "../hooks/useAdmin";
+
 const Navbar = () => {
+  // TODO: Replace isAdmin and isInstructor with verify
+  const isAdmin = true;
+  const isInstructor = false;
+
+  const navOptions = (
+    <>
+      <li>
+        <NavLink className="nav-item" to="/">
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className="nav-item" to="/classes">
+          Classes
+        </NavLink>
+      </li>
+      <li className="dropdown dropdown-hover">
+        <label tabIndex={0} className="nav-item">
+          Dashboard
+        </label>
+        <ul
+          tabIndex={0}
+          className="dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
+        >
+          {isAdmin ? (
+            <li>
+              <NavLink className="nav-item" to="/dashboard/manage-users">
+                Manage Users
+              </NavLink>
+              <NavLink className="nav-item" to="/dashboard/manage-classes">
+                Manage Classes
+              </NavLink>
+            </li>
+          ) : isInstructor ? (
+            <></>
+          ) : (
+            <>
+              {" "}
+              <li>
+                <NavLink
+                  className="nav-item"
+                  to="/dashboard/my-selected-classes"
+                >
+                  My Selected Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="nav-item"
+                  to="/dashboard/my-enrolled-classes"
+                >
+                  My Enrolled Classes
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </li>
+      <li>
+        <NavLink className="nav-item" to="/instructors">
+          Instructors
+        </NavLink>
+      </li>
+    </>
+  );
   const { user, logoutUser } = useAuth();
   const navigate = useNavigate();
   const handleLogout = () => {

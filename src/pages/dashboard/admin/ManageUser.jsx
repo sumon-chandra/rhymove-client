@@ -5,13 +5,15 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/sections/SectionTitle";
 import { FaTrash, FaUserShield } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageUser = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
-    //   enabled: !!localStorage.getItem("JWT"),
+    enabled: !!localStorage.getItem("JWT"),
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/users");
+      const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
