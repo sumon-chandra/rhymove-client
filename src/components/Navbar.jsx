@@ -22,7 +22,7 @@ const navOptions = (
         tabIndex={0}
         className="dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
       >
-        {/* <li>
+        <li>
           <NavLink className="nav-item" to="/dashboard/my-selected-classes">
             My Selected Classes
           </NavLink>
@@ -31,12 +31,12 @@ const navOptions = (
           <NavLink className="nav-item" to="/dashboard/my-enrolled-classes">
             My Enrolled Classes
           </NavLink>
-        </li> */}
-        <li>
+        </li>
+        {/* <li>
           <NavLink className="nav-item" to="/dashboard/manage-users">
             Manage Users
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </li>
     <li>

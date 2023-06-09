@@ -83,7 +83,7 @@ const ManageUser = () => {
       <Helmet>
         <title>Manage All Users - Rhymove Dance Studio & School</title>
       </Helmet>
-      <section className="section">
+      <section className="section lg:pb-36">
         <SectionTitle value="Manage All Users!" />
         <div className="w-full">
           <div className="uppercase font-cinzel lg:text-2xl text-xs font-bold p-3">
@@ -91,7 +91,7 @@ const ManageUser = () => {
               Total User: {users.length < 9 ? `0${users.length}` : users.length}
             </h4>
           </div>
-          <table className="table overflow-x-auto table-zebra w-full">
+          <table className="table overflow-x-auto table-zebra w-full border">
             <thead>
               <tr>
                 <th className="lg:text-xl">#</th>

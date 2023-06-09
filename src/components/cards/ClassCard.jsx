@@ -1,4 +1,42 @@
-const ClassCard = ({ item }) => {
+import axios from "axios";
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+
+const ClassCard = ({ item, isSelected }) => {
+  const { user } = useAuth();
+  const handleSelectClass = (selectItem) => {
+    Swal.fire({
+      title: "Select the Class!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Select",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const selectedClass = {
+          name: selectItem.name,
+          enrolledStudents: selectItem.enrolledStudents,
+          image: selectItem.image,
+          instructorName: selectItem.instructorName,
+          availableSeats: selectItem.availableSeats,
+          price: selectItem.price,
+          email: user?.email,
+        };
+        axios
+          .post("http://localhost:5000/selected-class", selectedClass)
+          .then(({ data }) => {
+            if (data.insertedId) {
+              Swal.fire(
+                "Selected!",
+                "Your class has been selected.",
+                "success"
+              );
+            }
+          });
+      }
+    });
+  };
   return (
     <div
       className={
@@ -31,12 +69,32 @@ const ClassCard = ({ item }) => {
           Price:
           <span className="font-bold"> ${item?.price}</span>
         </p>
-        <button
-          disabled={item?.availableSeats === 0}
-          className="btn-sm bg-priColor w-1/2 mx-auto text-white disabled:bg-gray-400"
-        >
-          Select the Class
-        </button>
+        {isSelected ? (
+          <div className="flex justify-between items-center gap-10">
+            <button
+              // onClick={() => handleSelectClass(item)}
+              // disabled={item?.availableSeats === 0}
+              className="btn-sm bg-priColor w-1/2 mx-auto text-white disabled:bg-gray-400"
+            >
+              Pay
+            </button>
+            <button
+              // onClick={() => handleSelectClass(item)}
+              // disabled={item?.availableSeats === 0}
+              className="btn-sm bg-red-500 w-1/2 mx-auto text-white disabled:bg-gray-400"
+            >
+              Delete
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => handleSelectClass(item)}
+            disabled={item?.availableSeats === 0}
+            className="btn-sm bg-priColor w-1/2 mx-auto text-white disabled:bg-gray-400"
+          >
+            Select the Class
+          </button>
+        )}
       </div>
     </div>
   );
