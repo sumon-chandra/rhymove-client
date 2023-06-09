@@ -1,17 +1,83 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/sections/SectionTitle";
 import { FaTrash, FaUserShield } from "react-icons/fa";
+import { GiTeacher } from "react-icons/gi";
 
 const ManageUser = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    axios("http://localhost:5000/users").then(({ data }) => {
-      //   console.log(data);
-      setUsers(data);
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ["users"],
+    //   enabled: !!localStorage.getItem("JWT"),
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:5000/users");
+      return res.data;
+    },
+  });
+  const handleMakeAdmin = (user) => {
+    Swal.fire({
+      title: `Do you really want to make ${user.name} as an Admin?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`http://localhost:5000/users/admin/${user.email}`)
+          .then(({ data }) => {
+            if (data.modifiedCount) {
+              Swal.fire("Great!", `${user.name} is new Instructor!`, "success");
+              //   refetch();
+            }
+          });
+      }
     });
-  }, []);
+  };
+  const handleMakeInstructor = (user) => {
+    Swal.fire({
+      title: `Do you really want to make ${user.name} as an Instructor?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`http://localhost:5000/users/instructor/${user.email}`)
+          .then(({ data }) => {
+            if (data.modifiedCount) {
+              Swal.fire("Great!", `${user.name} is new Instructor!`, "success");
+              refetch();
+            }
+          });
+      }
+    });
+  };
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: `Do your really want to delete ${user.name}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/users/${user._id}`)
+          .then(({ data }) => {
+            if (data.deletedCount) {
+              Swal.fire("Deleted!", "User has been deleted.", "success");
+              refetch();
+            }
+          });
+      }
+    });
+  };
   return (
     <>
       <Helmet>
@@ -37,21 +103,37 @@ const ManageUser = () => {
             </thead>
             <tbody>
               {users?.map((user, index) => (
-                // <AllUsersTable user={user} index={index} key={user._id} />
                 <tr key={user._id} className="font-bold">
                   <th>{index + 1}</th>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    <select name="make-role" id="role" className="px-4 py-2">
-                      <option value="">Set Role</option>
-                      <option value="instructor">Instructor</option>
-                      <option value="admin">Admin</option>
-                    </select>
+                    {user?.rule === "admin" ? (
+                      "Admin"
+                    ) : (
+                      <div className="flex gap-2 ">
+                        <button
+                          disabled={user?.rule === "instructor"}
+                          data-tip="Make Instructor"
+                          onClick={() => handleMakeInstructor(user)}
+                          className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
+                        >
+                          <GiTeacher />
+                        </button>
+
+                        <button
+                          data-tip="Make Admin"
+                          onClick={() => handleMakeAdmin(user)}
+                          className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
+                        >
+                          <FaUserShield />
+                        </button>
+                      </div>
+                    )}
                   </td>
                   <td>
                     <button
-                      onClick={() => handleDelete(user._id)}
+                      onClick={() => handleDelete(user)}
                       className="btn btn-ghost bg-red-600 btn-xs w-10 h-10 text-xl text-white hover:bg-red-500"
                     >
                       <FaTrash />
