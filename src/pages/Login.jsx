@@ -30,7 +30,12 @@ const Login = () => {
 
   // !! Login with Google
   const handleGoogleLogin = () => {
-    signInWithGoogle().then(() => {
+    signInWithGoogle().then((result) => {
+      const loggedUser = result.user;
+      const user = { name: loggedUser.displayName, email: loggedUser.email };
+      axios.post("http://localhost:5000/users", user).then(({ data }) => {
+        console.log(data);
+      });
       navigate(from);
     });
   };

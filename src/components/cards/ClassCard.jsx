@@ -3,7 +3,7 @@ const ClassCard = ({ item }) => {
     <div
       className={
         item?.availableSeats === 0
-          ? "border-2 border-red-500 bg-[#fa00002b]"
+          ? "border-2 border-red-500 bg-[#fa00002b] card rounded-none hover:shadow-2xl shadow-xl font-semibold lg:mt-0 mt-4"
           : `card border-0 rounded-none hover:shadow-2xl shadow-xl font-semibold lg:mt-0 mt-4`
       }
     >

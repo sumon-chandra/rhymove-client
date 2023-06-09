@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { FaGoogle, FaImages } from "react-icons/fa";
 import loginImg from "../assets/signup_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
+import axios from "axios";
 const Register = () => {
   const { signInWithGoogle, userInfo, createNewUser } = useContext(AuthContext);
   const [error, setError] = useState("");
@@ -14,7 +15,10 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -22,15 +26,10 @@ const Register = () => {
   // !! Handle Register
   const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
   const img_hosing_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
-  const handleRegister = (data) => {
-    console.log(data);
-    setError("");
-    if (data.password !== data.confirmPassword) {
-      setError("Passwords do not match");
-    }
-    createNewUser(data.email, data.password).then(() => {
+  const handleRegister = (userData) => {
+    createNewUser(userData.email, userData.password).then(() => {
       const formData = new FormData();
-      formData.append("image", data.image[0]);
+      formData.append("image", userData.image[0]);
       fetch(img_hosing_url, {
         method: "POST",
         body: formData,
@@ -38,10 +37,13 @@ const Register = () => {
         .then((response) => response.json())
         .then(({ data }) => {
           const photoURL = data.display_url;
-          userInfo(data.name, photoURL).then(() => {});
+          userInfo(userData.name, photoURL).then(() => {
+            const user = { name: userData.name, email: userData.email };
+            axios.post("http://localhost:5000/users", user).then(() => {});
+          });
         })
         .catch((err) => {
-          console.log(err);
+          setError(err.message);
         });
       reset();
       navigate(from);
@@ -53,6 +55,9 @@ const Register = () => {
     signInWithGoogle().then((result) => {
       const loggedUser = result.user;
       const user = { name: loggedUser.displayName, email: loggedUser.email };
+      axios.post("http://localhost:5000/users", user).then(({ data }) => {
+        console.log(data);
+      });
     });
   };
 
@@ -106,23 +111,23 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-                  {...register("password", {
-                    required: true,
-                    pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/,
-                  })}
-                  placeholder="Enter Your Password"
                   className="input input-bordered"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters long",
+                    },
+                    pattern: {
+                      value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/,
+                      message: "Password must match the specified pattern",
+                    },
+                  })}
                 />
-                {errors.password?.type === "required" && (
-                  <span className="text-red-400 text-xs font-semibold mt-2">
-                    This field is required.
-                  </span>
-                )}
-                {errors.password?.type === "pattern" && (
-                  <span className="text-red-400 text-xs font-semibold mt-2">
-                    Password must contain at least 6 character and one uppercase
-                    letter and one special character.
-                  </span>
+                {errors.password && (
+                  <p className="text-red-400 text-xs font-semibold mt-2">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
               <div className="form-control">
@@ -133,16 +138,18 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-                  {...register("confirmPassword", {
-                    required: true,
-                  })}
-                  placeholder="Enter Your Password"
                   className="input input-bordered"
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required",
+                    validate: (value) =>
+                      value === password.current ||
+                      "The passwords do not match",
+                  })}
                 />
-                {errors.password?.type === "required" && (
-                  <span className="text-red-400 text-xs font-semibold mt-2">
-                    This field is required.
-                  </span>
+                {errors.confirmPassword && (
+                  <p className="text-red-400 text-xs font-semibold mt-2">
+                    {errors.confirmPassword.message}
+                  </p>
                 )}
               </div>
               <div className="form-control">
@@ -167,7 +174,7 @@ const Register = () => {
               )}
               <div className="form-control mt-6">
                 <input
-                  disabled={error}
+                  disabled={!watch("confirmPassword")}
                   type="submit"
                   value="Register"
                   className="btn btn-sm lg:btn-md bg-priColor hover:bg-secColor normal-case border-0 text-white lg:text-xl shadow-lg"

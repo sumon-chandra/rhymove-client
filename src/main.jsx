@@ -7,11 +7,14 @@ import AuthProvider from "./context-provider/AuthProvider.jsx";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { HelmetProvider } from "react-helmet-async";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </AuthProvider>
   </React.StrictMode>
 );
