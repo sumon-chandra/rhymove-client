@@ -1,19 +1,12 @@
 import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  CardElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_API_KEY);
 
 const PaymentModal = ({ selectedItemToPay }) => {
-  const { price, name } = selectedItemToPay;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const { item } = selectedItemToPay;
+  console.log("Selecting ", selectedItemToPay);
   return (
     <>
       <input type="checkbox" id="payModal" className="modal-toggle" />
@@ -25,7 +18,7 @@ const PaymentModal = ({ selectedItemToPay }) => {
             <section>
               <Elements stripe={stripePromise}>
                 <CheckoutForm
-                  price={price}
+                  price={item?.price}
                   selectedItemToPay={selectedItemToPay}
                 />
               </Elements>

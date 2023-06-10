@@ -6,6 +6,8 @@ import useAuth from "./../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, selectedItemToPay }) => {
+  // console.log("Selected Item to pay :", selectedItemToPay);
+  const { item, refetch } = selectedItemToPay;
   const [cardError, setCartError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -70,8 +72,9 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
         useName: user?.displayName,
         useEmail: user?.email,
         price,
-        paidItemId: selectedItemToPay._id,
-        paidItemName: selectedItemToPay.name,
+        paidItemId: item._id,
+        selectedClassId: item.selectedClassId,
+        paidItemName: item.name,
         createdAt: new Date(),
       };
       axiosSecure.post("/payment", paymentInfo).then(({ data }) => {
@@ -81,6 +84,7 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
           data.updatedResult.modifiedCount > 0 &&
           data.insertResult.insertedId
         ) {
+          refetch();
           navigate("/dashboard/my-selected-classes");
         }
       });

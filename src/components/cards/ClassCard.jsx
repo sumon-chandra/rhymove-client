@@ -26,6 +26,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
       if (result.isConfirmed) {
         const selectedClass = {
           name: selectItem.name,
+          selectedClassId: selectItem._id,
           enrolledStudents: selectItem.enrolledStudents,
           image: selectItem.image,
           instructorName: selectItem.instructorName,
@@ -70,7 +71,6 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
       }
     });
   };
-  const handlePay = (item) => {};
   return (
     <div
       className={
@@ -114,7 +114,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
             ) : (
               <label
                 htmlFor="payModal"
-                onClick={() => setSelectedItemToPay(item)}
+                onClick={() => setSelectedItemToPay({ item, refetch })}
                 className="btn-sm cursor-pointer pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
               >
                 Pay
