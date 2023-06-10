@@ -3,13 +3,16 @@ import React, { useState } from "react";
 import useAxiosSecure from "./../hooks/useAxiosSecure";
 import { useEffect } from "react";
 import useAuth from "./../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, selectedItemToPay }) => {
   const [cardError, setCartError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [axiosSecure] = useAxiosSecure();
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -55,7 +58,6 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
       });
 
     if (confirmError) {
-      console.log(confirmError);
       setCartError(confirmError.message);
     }
 
@@ -73,12 +75,13 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
         createdAt: new Date(),
       };
       axiosSecure.post("/payment", paymentInfo).then(({ data }) => {
-        console.log(data);
+        event.target.reset();
+        setDisableBtn(true);
         if (
-          data.deleteResult.deletedCount > 0 &&
+          data.updatedResult.modifiedCount > 0 &&
           data.insertResult.insertedId
         ) {
-          alert("Payment Successfully");
+          navigate("/dashboard/my-selected-classes");
         }
       });
     }
@@ -107,7 +110,7 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
         <div className="text-center">
           <button
             type="submit"
-            disabled={!stripe || !clientSecret || processing}
+            disabled={!stripe || !clientSecret || processing || disableBtn}
             className="pay-btn btn btn-sm mt-10 w-1/2 lg:px-10 px-5 bg-priColor hover:bg-secColor border-0"
           >
             Pay
@@ -115,13 +118,13 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
         </div>
       </form>
       {cardError && (
-        <p className="text-red-500 text-xs pt-6 font-semibold">
-          Payment incomplete with error:- {cardError}
+        <p className="text-red-500 text-center text-xs pt-6 font-semibold">
+          Error:- {cardError}
         </p>
       )}
       {transactionId && (
-        <p className="text-green-500 text-xs pt-6 font-semibold">
-          Payment successful with transactionId:- {transactionId}
+        <p className="text-green-500 text-center text-xs pt-6 font-semibold">
+          {transactionId}
         </p>
       )}
     </>

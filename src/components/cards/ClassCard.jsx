@@ -96,13 +96,21 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
         </p>
         {isSelected ? (
           <div className="flex justify-between items-center gap-10">
-            <label
-              htmlFor="payModal"
-              onClick={() => setSelectedItemToPay(item)}
-              className="btn-sm cursor-pointer pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
-            >
-              Pay
-            </label>
+            {item?.status === "paid" ? (
+              <>
+                <label className="btn-sm pt-1 text-center bg-gray-500 w-1/2 mx-auto text-white">
+                  Paid
+                </label>
+              </>
+            ) : (
+              <label
+                htmlFor="payModal"
+                onClick={() => setSelectedItemToPay(item)}
+                className="btn-sm cursor-pointer pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
+              >
+                Pay
+              </label>
+            )}
             <button
               onClick={() => handleDelete(item)}
               className="btn-sm bg-red-500 w-1/2 mx-auto text-white"
