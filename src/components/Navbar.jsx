@@ -9,8 +9,9 @@ const Navbar = () => {
   const { user, logoutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  console.log("Navbar--", "isAdmin", isAdmin, "isInstructor", isInstructor);
   // console.log("Admin", isAdmin);
-  console.log("Instructor ", isInstructor);
+  // console.log("Instructor ", isInstructor);
   const navOptions = (
     <>
       <li>
@@ -60,7 +61,6 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                {" "}
                 <li>
                   <NavLink
                     className="nav-item"

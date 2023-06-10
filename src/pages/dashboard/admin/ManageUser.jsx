@@ -32,7 +32,7 @@ const ManageUser = () => {
           .then(({ data }) => {
             if (data.modifiedCount) {
               Swal.fire("Great!", `${user.name} is new Instructor!`, "success");
-              //   refetch();
+              refetch();
             }
           });
       }

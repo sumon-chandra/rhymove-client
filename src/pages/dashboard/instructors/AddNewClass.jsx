@@ -63,7 +63,7 @@ const AddNewClass = () => {
         <SectionTitle value="Add A New Class!" />
         <form
           onSubmit={handleSubmit(handleAddClass)}
-          className="card-body font-inter mt-8 lg:mx-32 lg:p-8 rounded-lg glass"
+          className="card-body font-inter mt-8 lg:mx-32 lg:p-8 rounded-lg bg-white"
         >
           <div className="lg:grid grid-cols-2 gap-4">
             <div className="form-control">
@@ -74,7 +74,7 @@ const AddNewClass = () => {
                 type="text"
                 {...register("name", { required: true })}
                 placeholder="Class Name"
-                className="input input-border"
+                className="input input-bordered"
               />
               {errors.name && (
                 <span className="text-red-400 text-xs font-semibold mt-2">
@@ -92,7 +92,7 @@ const AddNewClass = () => {
                 type="text"
                 {...register("price", { required: true })}
                 placeholder="Class Price"
-                className="input input-border"
+                className="input input-bordered"
               />
               {errors.name && (
                 <span className="text-red-400 text-xs font-semibold mt-2">
@@ -112,7 +112,7 @@ const AddNewClass = () => {
                   required: true,
                 })}
                 placeholder="Available Seat"
-                className="input input-border"
+                className="input input-bordered"
               />
               {errors.price && (
                 <span className="text-red-400 text-xs font-semibold mt-2">

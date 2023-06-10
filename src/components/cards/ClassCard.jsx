@@ -1,11 +1,20 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
-import PaymentModal from "../PaymentModal";
+import useAdmin from "./../../hooks/useAdmin";
+import useInstructor from "./../../hooks/useInstructor";
+import { useNavigate } from "react-router-dom";
 
 const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
   const { user } = useAuth();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+  console.log("ClassCard--", "isAdmin", isAdmin, "isInstructor", isInstructor);
+  const navigate = useNavigate();
   const handleSelectClass = (selectItem) => {
+    if (!user) {
+      return navigate("/login");
+    }
     Swal.fire({
       title: "Select the Class!",
       icon: "warning",
@@ -121,15 +130,13 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
         ) : (
           <button
             onClick={() => handleSelectClass(item)}
-            disabled={item?.availableSeats === 0}
+            disabled={item?.availableSeats === 0 || isAdmin || isInstructor}
             className="btn-sm bg-priColor w-1/2 mx-auto text-white disabled:bg-gray-400"
           >
             Select the Class
           </button>
         )}
       </div>
-      {/* !!!!!!!!!!!!!!!!! ******** Modal *********** !!!!!!!!!!!!!!
-      <PaymentModal /> */}
     </div>
   );
 };

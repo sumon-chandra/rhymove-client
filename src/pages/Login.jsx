@@ -23,9 +23,9 @@ const Login = () => {
   const handleLogin = (data) => {
     loginUser(data.email, data.password)
       .then((res) => {
-        navigate(from);
         loadJWT(res.user);
         reset();
+        navigate(from);
       })
       .catch((err) => {
         // TODO: Handle the error when password is invalid
