@@ -3,13 +3,11 @@ import { MdMenu } from "react-icons/md";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
 import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 
 const Navbar = () => {
   const [isAdmin] = useAdmin();
-  // console.log(isAdmin);
-  // TODO: Replace isAdmin and isInstructor with verify
-  // const isAdmin = true;
-  const isInstructor = false;
+  const [isInstructor] = useInstructor();
 
   const navOptions = (
     <>
@@ -32,16 +30,31 @@ const Navbar = () => {
           className="dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
         >
           {isAdmin ? (
-            <li>
-              <NavLink className="nav-item" to="/dashboard/manage-users">
-                Manage Users
-              </NavLink>
-              <NavLink className="nav-item" to="/dashboard/manage-classes">
-                Manage Classes
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink className="nav-item" to="/dashboard/manage-users">
+                  Manage Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-item" to="/dashboard/manage-classes">
+                  Manage Classes
+                </NavLink>
+              </li>
+            </>
           ) : isInstructor ? (
-            <></>
+            <>
+              <li>
+                <NavLink className="nav-item" to="/dashboard/add-new-class">
+                  Add New Class
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-item" to="/dashboard/my-classes">
+                  My Classes
+                </NavLink>
+              </li>
+            </>
           ) : (
             <>
               {" "}

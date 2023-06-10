@@ -5,7 +5,6 @@ import useAuth from "./useAuth";
 const useAdmin = () => {
   const { user, loading } = useAuth();
   const admin = JSON.parse(sessionStorage.getItem("isAdmin"));
-  console.log(admin);
   const [axiosSecure] = useAxiosSecure();
   const token = localStorage.getItem("JWT");
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
