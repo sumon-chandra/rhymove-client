@@ -20,6 +20,7 @@ const SelectedClasses = () => {
       return response.data;
     },
   });
+  const filteredClasses = classes.filter((item) => item?.status !== "paid");
   return (
     <>
       <Helmet>
@@ -28,7 +29,7 @@ const SelectedClasses = () => {
       <section className="section lg:pb-32 pb-10">
         <SectionTitle value="My Selected Classes!" />
         <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
-          {classes?.map((item) => (
+          {filteredClasses?.map((item) => (
             <ClassCard
               item={item}
               key={item._id}

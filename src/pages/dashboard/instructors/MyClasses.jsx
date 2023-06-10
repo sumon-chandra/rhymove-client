@@ -14,6 +14,7 @@ const MyClasses = () => {
       return res.data;
     },
   });
+  // TODO: Update the enrolled and available seat in class
   return (
     <>
       <Helmet>
@@ -40,12 +41,28 @@ const MyClasses = () => {
                 <p>Enrolled Student- {item?.enrolledStudents}</p>
                 <p>Price- ${item?.price}</p>
                 <p
-                  className={`${item?.status === "deny" && "text-red-600"} ${
+                  className={`${item?.status === "denied" && "text-red-600"} ${
                     item?.status === "approved" && "text-green-600"
                   } text-priColor font-bold capitalize italic`}
                 >
                   {item?.status}
                 </p>
+                <div
+                  className={`flex items-center ${
+                    item?.status === "denied"
+                      ? "justify-between"
+                      : "justify-end"
+                  }`}
+                >
+                  {item?.status === "denied" && (
+                    <button className="btn btn-sm normal-case text-xs">
+                      Feedback
+                    </button>
+                  )}
+                  <button className="btn btn-sm normal-case text-xs">
+                    Update
+                  </button>
+                </div>
               </div>
             </div>
           ))}
