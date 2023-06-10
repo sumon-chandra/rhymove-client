@@ -5,6 +5,7 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_API_KEY);
 
@@ -23,33 +24,10 @@ const PaymentModal = ({ selectedItemToPay }) => {
             <div className="lg:my-10 my-4"></div>
             <section>
               <Elements stripe={stripePromise}>
-                <form onSubmit={handleSubmit} className="">
-                  <CardElement
-                    className="card-element bg-slate-200 rounded-lg shadow-lg p-4"
-                    options={{
-                      style: {
-                        base: {
-                          fontSize: "16px",
-                          color: "#424770",
-                          "::placeholder": {
-                            color: "#aab7c4",
-                          },
-                        },
-                        invalid: {
-                          color: "#9e2146",
-                        },
-                      },
-                    }}
-                  />
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      className="pay-btn btn btn-sm mt-10 w-1/2 lg:px-10 px-5 bg-priColor hover:bg-secColor border-0"
-                    >
-                      Pay
-                    </button>
-                  </div>
-                </form>
+                <CheckoutForm
+                  price={price}
+                  selectedItemToPay={selectedItemToPay}
+                />
               </Elements>
             </section>
           </div>

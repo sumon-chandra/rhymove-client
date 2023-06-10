@@ -21,13 +21,13 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
-      <li className="dropdown dropdown-hover">
-        <label tabIndex={0} className="nav-item">
+      <li className="dropdown ">
+        <label tabIndex={10} className="nav-item">
           Dashboard
         </label>
         <ul
-          tabIndex={0}
-          className="dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
+          tabIndex={10}
+          className="lg:dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
         >
           {isAdmin ? (
             <>

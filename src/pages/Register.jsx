@@ -26,6 +26,7 @@ const Register = () => {
   // !! Handle Register
   const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
   const img_hosing_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
+  // TODO: Handle error when user is already exist
   const handleRegister = (userData) => {
     createNewUser(userData.email, userData.password).then(() => {
       const formData = new FormData();

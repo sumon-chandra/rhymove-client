@@ -99,7 +99,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
             <label
               htmlFor="payModal"
               onClick={() => setSelectedItemToPay(item)}
-              className="btn-sm pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
+              className="btn-sm cursor-pointer pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
             >
               Pay
             </label>
