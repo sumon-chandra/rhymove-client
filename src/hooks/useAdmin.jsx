@@ -10,7 +10,7 @@ const useAdmin = () => {
   const token = localStorage.getItem("JWT");
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
     queryKey: ["isAdmin", user?.email, token],
-    enabled: !loading,
+    enabled: !loading && !!user?.email && !!localStorage.getItem("JWT"),
     queryFn: async () => {
       if (!user || !token) {
         return false;
@@ -20,7 +20,6 @@ const useAdmin = () => {
         return true;
       }
       const res = await axiosSecure.get(`/users/admin/${user?.email}`);
-      console.log("Response: ", res);
       sessionStorage.setItem("isAdmin", res.data.admin);
       return res.data.admin;
     },

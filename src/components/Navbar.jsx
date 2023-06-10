@@ -5,8 +5,10 @@ import useAuth from "../hooks/useAuth";
 import useAdmin from "../hooks/useAdmin";
 
 const Navbar = () => {
+  const [isAdmin] = useAdmin();
+  // console.log(isAdmin);
   // TODO: Replace isAdmin and isInstructor with verify
-  const isAdmin = true;
+  // const isAdmin = true;
   const isInstructor = false;
 
   const navOptions = (

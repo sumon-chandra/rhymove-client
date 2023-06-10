@@ -22,11 +22,16 @@ const Login = () => {
 
   // !! Handle Sign in
   const handleLogin = (data) => {
-    loginUser(data.email, data.password).then((res) => {
-      loadJWT(res.user);
-      reset();
-      navigate(from);
-    });
+    loginUser(data.email, data.password)
+      .then((res) => {
+        loadJWT(res.user);
+        reset();
+        navigate(from);
+      })
+      .catch((err) => {
+        // TODO: Handle the error when password is invalid
+        console.log(err.message);
+      });
   };
 
   // !! Login with Google
