@@ -1,10 +1,9 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { FaFacebook, FaGoogle, FaGithub } from "react-icons/fa";
-// import bg from "../assets/others/pattern.png";
+import { FaGoogle } from "react-icons/fa";
 import loginImg from "../assets/login_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
 import axios from "axios";
@@ -24,9 +23,9 @@ const Login = () => {
   const handleLogin = (data) => {
     loginUser(data.email, data.password)
       .then((res) => {
+        navigate(from);
         loadJWT(res.user);
         reset();
-        navigate(from);
       })
       .catch((err) => {
         // TODO: Handle the error when password is invalid
@@ -39,15 +38,17 @@ const Login = () => {
     signInWithGoogle().then((result) => {
       const loggedUser = result.user;
       const user = { name: loggedUser.displayName, email: loggedUser.email };
-      axios.post("http://localhost:5000/users", user).then(({ data }) => {
-        console.log(data);
+      axios.post("http://localhost:5000/users", user).then(() => {
+        navigate(from);
       });
-      navigate(from);
     });
   };
 
   return (
     <>
+      <Helmet>
+        <title>Login - Rhymove Dance Studio & School</title>
+      </Helmet>
       <section className="lg:pt-20 pt-10">
         <div className="lg:w-1200 mx-auto px-4 lg:px-0 min-h-screen bg-transparent">
           <div className="lg:flex justify-evenly items-center gap-x-10">

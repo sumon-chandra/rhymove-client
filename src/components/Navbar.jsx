@@ -6,9 +6,11 @@ import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 
 const Navbar = () => {
+  const { user, logoutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-
+  // console.log("Admin", isAdmin);
+  console.log("Instructor ", isInstructor);
   const navOptions = (
     <>
       <li>
@@ -21,63 +23,65 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
-      <li className="dropdown ">
-        <label tabIndex={10} className="nav-item">
-          Dashboard
-        </label>
-        <ul
-          tabIndex={10}
-          className="lg:dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
-        >
-          {isAdmin ? (
-            <>
-              <li>
-                <NavLink className="nav-item" to="/dashboard/manage-users">
-                  Manage Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="nav-item" to="/dashboard/manage-classes">
-                  Manage Classes
-                </NavLink>
-              </li>
-            </>
-          ) : isInstructor ? (
-            <>
-              <li>
-                <NavLink className="nav-item" to="/dashboard/add-new-class">
-                  Add New Class
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="nav-item" to="/dashboard/my-classes">
-                  My Classes
-                </NavLink>
-              </li>
-            </>
-          ) : (
-            <>
-              {" "}
-              <li>
-                <NavLink
-                  className="nav-item"
-                  to="/dashboard/my-selected-classes"
-                >
-                  My Selected Classes
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="nav-item"
-                  to="/dashboard/my-enrolled-classes"
-                >
-                  My Enrolled Classes
-                </NavLink>
-              </li>
-            </>
-          )}
-        </ul>
-      </li>
+      {user && (
+        <li className="dropdown ">
+          <label tabIndex={10} className="nav-item">
+            Dashboard
+          </label>
+          <ul
+            tabIndex={10}
+            className="lg:dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
+          >
+            {isAdmin ? (
+              <>
+                <li>
+                  <NavLink className="nav-item" to="/dashboard/manage-users">
+                    Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-item" to="/dashboard/manage-classes">
+                    Manage Classes
+                  </NavLink>
+                </li>
+              </>
+            ) : isInstructor ? (
+              <>
+                <li>
+                  <NavLink className="nav-item" to="/dashboard/add-new-class">
+                    Add New Class
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-item" to="/dashboard/my-classes">
+                    My Classes
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                {" "}
+                <li>
+                  <NavLink
+                    className="nav-item"
+                    to="/dashboard/my-selected-classes"
+                  >
+                    My Selected Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="nav-item"
+                    to="/dashboard/my-enrolled-classes"
+                  >
+                    My Enrolled Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+        </li>
+      )}
       <li>
         <NavLink className="nav-item" to="/instructors">
           Instructors
@@ -85,7 +89,7 @@ const Navbar = () => {
       </li>
     </>
   );
-  const { user, logoutUser } = useAuth();
+
   const navigate = useNavigate();
   const handleLogout = () => {
     logoutUser().then(() => {

@@ -14,7 +14,6 @@ const useInstructor = () => {
         return false;
       }
       if (instructor) {
-        console.log("Hello");
         return true;
       }
       const res = await axiosSecure.get(`/users/instructor/${user?.email}`);

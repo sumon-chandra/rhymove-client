@@ -40,7 +40,9 @@ const Register = () => {
           const photoURL = data.display_url;
           userInfo(userData.name, photoURL).then(() => {
             const user = { name: userData.name, email: userData.email };
-            axios.post("http://localhost:5000/users", user).then(() => {});
+            axios.post("http://localhost:5000/users", user).then((res) => {
+              console.log(res.data);
+            });
           });
         })
         .catch((err) => {
