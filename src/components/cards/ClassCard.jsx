@@ -9,7 +9,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
   const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  console.log("ClassCard--", "isAdmin", isAdmin, "isInstructor", isInstructor);
+  // console.log("ClassCard--", "isAdmin", isAdmin, "isInstructor", isInstructor);
   const navigate = useNavigate();
   const handleSelectClass = (selectItem) => {
     if (!user) {

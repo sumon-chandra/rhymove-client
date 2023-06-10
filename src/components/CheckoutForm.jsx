@@ -69,9 +69,10 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
       setTransactionId("Payment successful!");
       const paymentInfo = {
         transactionId: paymentIntent.id,
-        useName: user?.displayName,
-        useEmail: user?.email,
+        userName: user?.displayName,
+        userEmail: user?.email,
         price,
+        image: item.image,
         paidItemId: item._id,
         selectedClassId: item.selectedClassId,
         paidItemName: item.name,

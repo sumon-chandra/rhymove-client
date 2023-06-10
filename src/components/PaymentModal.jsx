@@ -6,7 +6,6 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_API_KEY);
 
 const PaymentModal = ({ selectedItemToPay }) => {
   const { item } = selectedItemToPay;
-  console.log("Selecting ", selectedItemToPay);
   return (
     <>
       <input type="checkbox" id="payModal" className="modal-toggle" />
