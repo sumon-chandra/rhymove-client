@@ -28,7 +28,7 @@ const ManageUser = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/users/admin/${user.email}`)
+          .patch(`https://rhymove-server.vercel.app/users/admin/${user.email}`)
           .then(({ data }) => {
             if (data.modifiedCount) {
               Swal.fire("Great!", `${user.name} is new Instructor!`, "success");
@@ -49,7 +49,9 @@ const ManageUser = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/users/instructor/${user.email}`)
+          .patch(
+            `https://rhymove-server.vercel.app/users/instructor/${user.email}`
+          )
           .then(({ data }) => {
             if (data.modifiedCount) {
               Swal.fire("Great!", `${user.name} is new Instructor!`, "success");
@@ -70,7 +72,7 @@ const ManageUser = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/users/${user._id}`)
+          .delete(`https://rhymove-server.vercel.app/users/${user._id}`)
           .then(({ data }) => {
             if (data.deletedCount) {
               Swal.fire("Deleted!", "User has been deleted.", "success");

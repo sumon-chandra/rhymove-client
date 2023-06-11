@@ -26,31 +26,36 @@ const Register = () => {
   // !! Handle Register
   const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
   const img_hosing_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
-  // TODO: Handle error when user is already exist
   const handleRegister = (userData) => {
-    createNewUser(userData.email, userData.password).then(() => {
-      const formData = new FormData();
-      formData.append("image", userData.image[0]);
-      fetch(img_hosing_url, {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then(({ data }) => {
-          const photoURL = data.display_url;
-          userInfo(userData.name, photoURL).then(() => {
-            const user = { name: userData.name, email: userData.email };
-            axios.post("http://localhost:5000/users", user).then((res) => {
-              console.log(res.data);
-            });
-          });
+    createNewUser(userData.email, userData.password)
+      .then(() => {
+        const formData = new FormData();
+        formData.append("image", userData.image[0]);
+        fetch(img_hosing_url, {
+          method: "POST",
+          body: formData,
         })
-        .catch((err) => {
-          setError(err.message);
-        });
-      reset();
-      navigate(from);
-    });
+          .then((response) => response.json())
+          .then(({ data }) => {
+            const photoURL = data.display_url;
+            userInfo(userData.name, photoURL).then(() => {
+              const user = { name: userData.name, email: userData.email };
+              axios
+                .post("https://rhymove-server.vercel.app/users", user)
+                .then((res) => {
+                  console.log(res.data);
+                });
+            });
+          })
+          .catch((err) => {
+            setError(err.message);
+          });
+        reset();
+        navigate(from);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   };
 
   // !! Login with Google
@@ -58,9 +63,11 @@ const Register = () => {
     signInWithGoogle().then((result) => {
       const loggedUser = result.user;
       const user = { name: loggedUser.displayName, email: loggedUser.email };
-      axios.post("http://localhost:5000/users", user).then(({ data }) => {
-        console.log(data);
-      });
+      axios
+        .post("https://rhymove-server.vercel.app/users", user)
+        .then(({ data }) => {
+          console.log(data);
+        });
     });
   };
 

@@ -28,7 +28,6 @@ const Login = () => {
         navigate(from);
       })
       .catch((err) => {
-        // TODO: Handle the error when password is invalid
         setError(err.message);
       });
   };
@@ -38,7 +37,7 @@ const Login = () => {
     signInWithGoogle().then((result) => {
       const loggedUser = result.user;
       const user = { name: loggedUser.displayName, email: loggedUser.email };
-      axios.post("http://localhost:5000/users", user).then(() => {
+      axios.post("https://rhymove-server.vercel.app/users", user).then(() => {
         navigate(from);
       });
     });
@@ -100,7 +99,11 @@ const Login = () => {
                   </a>
                 </label>
               </div>
-              {error && <p>{error}</p>}
+              {error && (
+                <span className="text-red-400 text-xs font-semibold mt-2">
+                  {error}
+                </span>
+              )}
               <div className="form-control mt-6">
                 <input
                   type="submit"

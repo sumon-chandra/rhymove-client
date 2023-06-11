@@ -142,8 +142,17 @@ const ManageClasses = () => {
     };
     axiosSecure
       .patch(`/class-feedback/${clickedItem?._id}`, feedbackInfo)
-      .then((res) => {
-        reset();
+      .then(({ data }) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your feedback has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          reset();
+        }
       });
   };
   return (

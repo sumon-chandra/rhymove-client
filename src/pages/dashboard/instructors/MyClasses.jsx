@@ -47,7 +47,7 @@ const MyClasses = () => {
                       ? "text-red-600"
                       : item?.status === "approved"
                       ? "text-green-600"
-                      : text - priColor
+                      : "text-priColor"
                   } font-bold capitalize italic`}
                 >
                   {item?.status}
