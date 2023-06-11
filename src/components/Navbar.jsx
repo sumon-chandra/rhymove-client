@@ -63,7 +63,7 @@ const Navbar = () => {
                     className="nav-item"
                     to="/dashboard/my-selected-classes"
                   >
-                    My Selected Classes
+                    Selected Classes
                   </NavLink>
                 </li>
                 <li>
@@ -71,7 +71,12 @@ const Navbar = () => {
                     className="nav-item"
                     to="/dashboard/my-enrolled-classes"
                   >
-                    My Enrolled Classes
+                    Enrolled Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-item" to="/dashboard/payment-history">
+                    Payment History
                   </NavLink>
                 </li>
               </>

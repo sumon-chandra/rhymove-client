@@ -21,6 +21,7 @@ import ManageUser from "./pages/dashboard/admin/ManageUser";
 import ManageClasses from "./pages/dashboard/admin/ManageClasses";
 import AddNewClass from "./pages/dashboard/instructors/AddNewClass";
 import MyClasses from "./pages/dashboard/instructors/MyClasses";
+import PaymentHistory from "./pages/dashboard/Students/PaymentHistory";
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements([
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="my-selected-classes" element={<SelectedClasses />} />
           <Route path="my-enrolled-classes" element={<EnrolledClasses />} />
+          <Route path="payment-history" element={<PaymentHistory />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-classes" element={<ManageClasses />} />
           <Route path="add-new-class" element={<AddNewClass />} />
