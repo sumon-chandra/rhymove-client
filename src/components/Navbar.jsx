@@ -6,12 +6,16 @@ import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 
 const Navbar = () => {
-  const { user, logoutUser } = useAuth();
+  const { user, logoutUser, loading } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  console.log(loading);
   console.log("Navbar--", "isAdmin", isAdmin, "isInstructor", isInstructor);
   // console.log("Admin", isAdmin);
   // console.log("Instructor ", isInstructor);
+  // if (loading) {
+  //   return <p>Hello</p>;
+  // }
   const navOptions = (
     <>
       <li>

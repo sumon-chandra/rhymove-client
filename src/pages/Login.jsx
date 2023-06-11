@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
 import { FaGoogle } from "react-icons/fa";
 import loginImg from "../assets/login_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
@@ -23,7 +22,7 @@ const Login = () => {
   const handleLogin = (data) => {
     loginUser(data.email, data.password)
       .then((res) => {
-        loadJWT(res.user);
+        // loadJWT(res.user);
         reset();
         navigate(from);
       })

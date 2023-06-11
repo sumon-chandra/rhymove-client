@@ -15,8 +15,8 @@ import { auth } from "./../firebase/firebase.config";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
 
@@ -55,19 +55,28 @@ const AuthProvider = ({ children }) => {
 
   // Load JWT info
   const loadJWT = (user) => {
-    axios
-      .post("http://localhost:5000/jwt", { email: user.email })
-      .then(({ data }) => {
-        const token = data.token;
-        localStorage.setItem("JWT", token);
-      });
+    // axios
+    //   .post("http://localhost:5000/jwt", { email: user.email })
+    //   .then(({ data }) => {
+    //     const token = data.token;
+    //     localStorage.setItem("JWT", token);
+    //     setLoading(false);
+    //   });
   };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       userInfo();
       setUser(currentUser);
       if (currentUser) {
-        loadJWT(currentUser);
+        // loadJWT(currentUser);
+        axios
+          .post("http://localhost:5000/jwt", { email: currentUser?.email })
+          .then(({ data }) => {
+            const token = data.token;
+            localStorage.setItem("JWT", token);
+            setLoading(false);
+          });
+        // setLoading(false);
       } else {
         localStorage.removeItem("JWT");
       }

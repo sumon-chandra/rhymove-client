@@ -13,6 +13,7 @@ const SelectedClasses = () => {
   const [selectedItemToPay, setSelectedItemToPay] = useState({});
   const { data: classes = [], refetch } = useQuery({
     queryKey: ["selected-class"],
+    enabled: !!user?.email,
     queryFn: async () => {
       const response = await axiosSecure.get(
         `/selected-class?email=${user?.email}`

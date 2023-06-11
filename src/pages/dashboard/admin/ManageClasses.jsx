@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/sections/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { useForm } from "react-hook-form";
 
-const ManageClassCard = ({ item }) => {
+const ManageClassCard = ({ item, setClickedItem }) => {
   return (
     <div
       className={
@@ -41,16 +42,23 @@ const ManageClassCard = ({ item }) => {
         <div className="flex justify-between gap-4 items-center pt-6">
           <button
             disabled={item?.status === "denied" || item?.status === "approved"}
-            className="btn btn-sm rounded-none normal-case text-white bg-green-600 hover:bg-green-500"
+            className="btn border-0 btn-sm rounded-none normal-case text-white bg-green-600 hover:bg-green-500"
           >
-            Approved
+            Approve
           </button>
-          <button className="btn btn-sm rounded-none normal-case text-white bg-red-600 hover:bg-red-500">
+          <button
+            disabled={item?.status === "denied" || item?.status === "approved"}
+            className="btn border-0 btn-sm rounded-none normal-case text-white bg-red-600 hover:bg-red-500"
+          >
             Deny
           </button>
-          <button className="btn btn-sm rounded-none normal-case text-white bg-priColor hover:bg-secColor">
+          <label
+            htmlFor="feedbackModal"
+            onClick={() => setClickedItem(item)}
+            className="btn border-0 btn-sm rounded-none normal-case text-white bg-priColor hover:bg-secColor"
+          >
             Feedback
-          </button>
+          </label>
         </div>
       </div>
     </div>
@@ -58,8 +66,15 @@ const ManageClassCard = ({ item }) => {
 };
 
 const ManageClasses = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
   const [axiosSecure] = useAxiosSecure();
   const { user } = useAuth();
+  const [clickedItem, setClickedItem] = useState({});
   const {
     data: classes = [],
     isLoading,
@@ -74,6 +89,13 @@ const ManageClasses = () => {
       return res.data;
     },
   });
+  const handleSubmitFeedback = ({ feedback }) => {
+    axiosSecure
+      .patch(`/my-classes/${clickedItem?._id}`, { feedback })
+      .then((res) => {
+        reset();
+      });
+  };
   return (
     <>
       <Helmet>
@@ -83,10 +105,42 @@ const ManageClasses = () => {
         <SectionTitle value="Manage All Classes!" />
         <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
           {classes.map((item) => (
-            <ManageClassCard key={item?._id} item={item} />
+            <ManageClassCard
+              key={item?._id}
+              item={item}
+              setClickedItem={setClickedItem}
+            />
           ))}
         </div>
       </section>
+      <input type="checkbox" id="feedbackModal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center py-2">
+            {clickedItem?.name}!
+          </h3>
+          <form onSubmit={handleSubmit(handleSubmitFeedback)}>
+            <textarea
+              placeholder="Write your feedback"
+              {...register("feedback", { required: true })}
+              className="textarea textarea-bordered textarea-sm w-full"
+            />
+            <input
+              type="submit"
+              value="Submit"
+              className="btn btn-sm bg-priColor hover:bg-secColor mt-4 normal-case text-white"
+            />
+          </form>
+          <div className="modal-action">
+            <label
+              htmlFor="feedbackModal"
+              className="btn btn-sm btn-neutral h-8 w-8 rounded-full"
+            >
+              X
+            </label>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

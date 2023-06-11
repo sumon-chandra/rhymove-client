@@ -4,12 +4,13 @@ import useAuth from "./useAuth";
 
 const useInstructor = () => {
   const { user, loading } = useAuth();
+  // console.log(user);
   const instructor = JSON.parse(sessionStorage.getItem("isInstructor"));
   const [axiosSecure] = useAxiosSecure();
   const token = localStorage.getItem("JWT");
   const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
     queryKey: ["isInstructor", user?.email, token],
-    enabled: !!user?.email && !!localStorage.getItem("JWT"),
+    enabled: !loading && !!user?.email && !!localStorage.getItem("JWT"),
     queryFn: async () => {
       // if (!user || !token) {
       //   return false;
