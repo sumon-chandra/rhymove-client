@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../hooks/useAxiosSecure";
@@ -5,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import SectionTitle from "./../../../components/sections/SectionTitle";
 const MyClasses = () => {
   const [axiosSecure] = useAxiosSecure();
+  const [selectedItem, setSelectedItem] = useState(null);
   const { user } = useAuth();
   const { data: classes = [], isLoading } = useQuery({
     queryKey: ["MyClasses"],
@@ -49,15 +51,17 @@ const MyClasses = () => {
                 </p>
                 <div
                   className={`flex items-center ${
-                    item?.status === "denied"
-                      ? "justify-between"
-                      : "justify-end"
+                    item?.feedback ? "justify-between" : "justify-end"
                   }`}
                 >
-                  {item?.status === "denied" && (
-                    <button className="btn btn-sm normal-case text-xs">
+                  {item?.feedback && (
+                    <label
+                      htmlFor="showFeedbackModal"
+                      onClick={() => setSelectedItem(item)}
+                      className="btn btn-sm normal-case text-xs"
+                    >
                       Feedback
-                    </button>
+                    </label>
                   )}
                   <button className="btn btn-sm normal-case text-xs">
                     Update
@@ -68,6 +72,24 @@ const MyClasses = () => {
           ))}
         </div>
       </section>
+      {/* ********** Modal for display feedback ********** */}
+      <input type="checkbox" id="showFeedbackModal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">{selectedItem?.name}</h3>
+          <p className="border-l-4 mx-2 my-5 text-gray-500 ps-2">
+            {selectedItem?.feedback}
+          </p>
+          <div className="modal-action">
+            <label
+              htmlFor="showFeedbackModal"
+              className="btn btn-neutral btn-sm btn-circle"
+            >
+              X
+            </label>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
