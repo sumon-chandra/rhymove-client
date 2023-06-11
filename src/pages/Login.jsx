@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,8 @@ import loginImg from "../assets/login_bg.svg";
 import { AuthContext } from "../context-provider/AuthProvider";
 import axios from "axios";
 const Login = () => {
-  const { loginUser, signInWithGoogle, loadJWT } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const { loginUser, signInWithGoogle } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -28,7 +29,7 @@ const Login = () => {
       })
       .catch((err) => {
         // TODO: Handle the error when password is invalid
-        console.log(err.message);
+        setError(err.message);
       });
   };
 
@@ -99,6 +100,7 @@ const Login = () => {
                   </a>
                 </label>
               </div>
+              {error && <p>{error}</p>}
               <div className="form-control mt-6">
                 <input
                   type="submit"

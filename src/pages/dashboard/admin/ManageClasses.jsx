@@ -1,12 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/sections/SectionTitle";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import { useForm } from "react-hook-form";
 
-const ManageClassCard = ({ item, setClickedItem }) => {
+const ManageClassCard = ({ item, setClickedItem, refetch }) => {
+  const [axiosSecure] = useAxiosSecure();
+  const handleApproval = (selectedItem) => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Approve",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/class-approved/${selectedItem?._id}`)
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              refetch();
+              Swal.fire("Approved", "", "success");
+            }
+          });
+      }
+    });
+  };
+  const handleDenied = (selectedItem) => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFA500",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Deny",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/class-denied/${selectedItem?._id}`)
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              refetch();
+              Swal.fire("Denied", "", "success");
+            }
+          });
+      }
+    });
+  };
   return (
     <div
       className={
@@ -41,12 +85,14 @@ const ManageClassCard = ({ item, setClickedItem }) => {
         </p>
         <div className="flex justify-between gap-4 items-center pt-6">
           <button
+            onClick={() => handleApproval(item)}
             disabled={item?.status === "denied" || item?.status === "approved"}
             className="btn border-0 btn-sm rounded-none normal-case text-white bg-green-600 hover:bg-green-500"
           >
             Approve
           </button>
           <button
+            onClick={() => handleDenied(item)}
             disabled={item?.status === "denied" || item?.status === "approved"}
             className="btn border-0 btn-sm rounded-none normal-case text-white bg-red-600 hover:bg-red-500"
           >
@@ -90,8 +136,12 @@ const ManageClasses = () => {
     },
   });
   const handleSubmitFeedback = ({ feedback }) => {
+    const feedbackInfo = {
+      feedback,
+      feedbackWriter: user?.displayName,
+    };
     axiosSecure
-      .patch(`/my-classes/${clickedItem?._id}`, { feedback })
+      .patch(`/class-feedback/${clickedItem?._id}`, feedbackInfo)
       .then((res) => {
         reset();
       });
@@ -108,11 +158,14 @@ const ManageClasses = () => {
             <ManageClassCard
               key={item?._id}
               item={item}
+              refetch={refetch}
               setClickedItem={setClickedItem}
             />
           ))}
         </div>
       </section>
+
+      {/* *************** Feedback modal ********* */}
       <input type="checkbox" id="feedbackModal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">

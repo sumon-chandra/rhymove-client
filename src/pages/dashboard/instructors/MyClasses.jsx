@@ -42,9 +42,13 @@ const MyClasses = () => {
                 <p>Enrolled Student- {item?.enrolledStudents}</p>
                 <p>Price- ${item?.price}</p>
                 <p
-                  className={`${item?.status === "denied" && "text-red-600"} ${
-                    item?.status === "approved" && "text-green-600"
-                  } text-priColor font-bold capitalize italic`}
+                  className={`${
+                    item?.status === "denied"
+                      ? "text-red-600"
+                      : item?.status === "approved"
+                      ? "text-green-600"
+                      : text - priColor
+                  } font-bold capitalize italic`}
                 >
                   {item?.status}
                 </p>
@@ -76,9 +80,12 @@ const MyClasses = () => {
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">{selectedItem?.name}</h3>
-          <p className="border-l-4 mx-2 my-5 text-gray-500 ps-2">
-            {selectedItem?.feedback}
-          </p>
+          <div className="border-l-4 mx-2 my-5 text-gray-500 ps-2">
+            <p>{selectedItem?.feedback?.feedback}</p>
+            <p className="text-xs italic mt-4 font-semibold">
+              From- {selectedItem?.feedback?.feedbackWriter} ( instructor )
+            </p>
+          </div>
           <div className="modal-action">
             <label
               htmlFor="showFeedbackModal"
