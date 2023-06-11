@@ -3,26 +3,17 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 
 const useInstructor = () => {
-  const { user, loading } = useAuth();
-  // console.log(user);
-  const instructor = JSON.parse(sessionStorage.getItem("isInstructor"));
+  const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const token = localStorage.getItem("JWT");
-  const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
-    queryKey: ["isInstructor", user?.email, token],
-    enabled: !loading && !!user?.email && !!localStorage.getItem("JWT"),
-    queryFn: async () => {
-      // if (!user || !token) {
-      //   return false;
-      // }
-      // if (instructor) {
-      //   return true;
-      // }
-      const res = await axiosSecure.get(`/users/instructor/${user?.email}`);
-      sessionStorage.setItem("isInstructor", res.data.instructor);
-      return res.data.instructor;
-    },
-  });
+  const { data: isInstructor = false, isLoading: isInstructorLoading } =
+    useQuery({
+      queryKey: ["isInstructor", user?.email],
+      enabled: !!user?.email && !!localStorage.getItem("JWT"),
+      queryFn: async () => {
+        const res = await axiosSecure.get(`/users/instructor/${user?.email}`);
+        return res.data.instructor;
+      },
+    });
   return [isInstructor, isInstructorLoading];
 };
 

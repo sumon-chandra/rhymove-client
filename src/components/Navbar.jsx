@@ -9,7 +9,7 @@ const Navbar = () => {
   const { user, logoutUser, loading } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  console.log(loading);
+  // console.log(loading);
   console.log("Navbar--", "isAdmin", isAdmin, "isInstructor", isInstructor);
   // console.log("Admin", isAdmin);
   // console.log("Instructor ", isInstructor);

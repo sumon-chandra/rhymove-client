@@ -3,22 +3,13 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 
 const useAdmin = () => {
-  const { user, loading } = useAuth();
-  const admin = JSON.parse(sessionStorage.getItem("isAdmin"));
+  const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const token = localStorage.getItem("JWT");
-  const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
-    queryKey: ["isAdmin", user?.email, token],
-    enabled: !loading && !!user?.email && !!localStorage.getItem("JWT"),
+  const { data: isAdmin = false, isLoading: isAdminLoading } = useQuery({
+    queryKey: ["isAdmin", user?.email],
+    enabled: !!user?.email && !!localStorage.getItem("JWT"),
     queryFn: async () => {
-      // if (!user || !token) {
-      //   return false;
-      // }
-      // if (admin) {
-      //   return true;
-      // }
       const res = await axiosSecure.get(`/users/admin/${user?.email}`);
-      sessionStorage.setItem("isAdmin", res.data.admin);
       return res.data.admin;
     },
   });
