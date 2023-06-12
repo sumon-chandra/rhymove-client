@@ -22,3 +22,9 @@
     background: transparent;
     border-bottom: 3px solid #FFA500;
 }
+.dark {
+    --bg-gradient-color-start: #8c8c8c;
+    /* Set your dark mode background gradient start color */
+    --bg-gradient-color-end: #838383;
+    /* Set your dark mode background gradient end color */
+}

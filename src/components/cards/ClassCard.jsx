@@ -136,7 +136,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           <button
             onClick={() => handleSelectClass(item)}
             disabled={item?.availableSeats === 0 || isAdmin || isInstructor}
-            className="btn-sm bg-priColor w-1/2 mx-auto text-white disabled:bg-gray-400"
+            className="btn-sm glass w-1/2 mx-auto shadow-xl border-4"
           >
             Select the Class
           </button>

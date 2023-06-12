@@ -1,9 +1,10 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
-import logo from "../assets/logo.png";
-import useAuth from "../hooks/useAuth";
-import useAdmin from "../hooks/useAdmin";
-import useInstructor from "../hooks/useInstructor";
+import logo from "../../assets/logo.png";
+import useAuth from "../../hooks/useAuth";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
+import Toggle from "./Toggle";
 
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
@@ -28,7 +29,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={10}
-            className="lg:dropdown-content nav menu p-4 shadow bg-[#ffffffc1] rounded-box w-44 space-y-2"
+            className="lg:dropdown-content nav menu p-4 shadow glass rounded-box w-44 space-y-2"
           >
             {isAdmin ? (
               <>
@@ -104,7 +105,7 @@ const Navbar = () => {
         <div className="dropdown">
           <label
             tabIndex={0}
-            className="mt-12 text-2xl bg-gray-700 rounded-lg lg:hidden"
+            className="mt-12 text-2xl glass rounded-lg lg:hidden"
           >
             <MdMenu />
           </label>
@@ -126,12 +127,12 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 nav gap-4">{navOptions}</ul>
       </div>
       <div className="navbar-end">
+        <Toggle />
         {user ? (
           <>
-            {" "}
             <button
               onClick={handleLogout}
-              className="btn-sm rounded-lg  bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
+              className="btn-sm rounded-lg  glass font-bold font-K2D normal-case"
             >
               Logout
             </button>
@@ -139,7 +140,7 @@ const Navbar = () => {
         ) : (
           <Link
             to="/login"
-            className="btn-sm pt-1 rounded-lg  bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
+            className="btn-sm pt-1 rounded-lg  glass font-bold font-K2D normal-case"
           >
             Login
           </Link>

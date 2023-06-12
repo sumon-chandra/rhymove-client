@@ -43,10 +43,10 @@ const About = () => {
         <div className="flex items-end gap-2 lg:mt-14 mt-6">
           <img src={arrow} alt="" className="lg:w-20 w-6" />
           <Link
-            to="/login"
+            to="/"
             className="btn btn-sm lg:btn-md rounded-lg lg:text-xl text-xs bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
           >
-            Sign Up
+            See more
           </Link>
         </div>
       </div>

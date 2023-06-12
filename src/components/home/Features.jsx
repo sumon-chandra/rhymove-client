@@ -6,7 +6,7 @@ import { GiGuitar } from "react-icons/gi";
 
 const Features = () => {
   return (
-    <section className="section lg:grid grid-cols-2 items-center">
+    <section className="section lg:grid grid-cols-2 items-center lg:pb-32 pb-5">
       <div className="lg:-mr-20 hidden lg:block">
         <img src={img} alt="" className="w-full" />
       </div>
@@ -17,7 +17,7 @@ const Features = () => {
         <div className="lg:space-y-24 space-y-20 relative">
           <div className="lg:flex items-end gap-10 lg:relative right-24">
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
+              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-gray-300 border-4 border-priColor rounded-full">
                 <MdOutlineEventSeat />
               </div>
               <h4 className="my-3 text-2xl font-bold">Join Our Class</h4>
@@ -39,7 +39,7 @@ const Features = () => {
               className="rotate-90 w-20 hidden lg:block"
             />
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
+              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-gray-300 border-4 border-priColor rounded-full">
                 <GiGuitar />
               </div>
               <h4 className="my-3 text-2xl font-bold">Dance Choreography</h4>
@@ -51,7 +51,7 @@ const Features = () => {
           </div>
           <div className="lg:flex items-end gap-10 lg:relative right-24">
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
+              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-gray-300 border-4 border-priColor rounded-full">
                 <MdOutlineSportsGymnastics />
               </div>
               <h4 className="my-3 text-2xl font-bold">Perform Onstage</h4>

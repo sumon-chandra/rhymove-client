@@ -52,12 +52,8 @@ const MyClasses = () => {
                 >
                   {item?.status}
                 </p>
-                <div
-                  className={`flex items-center ${
-                    item?.feedback ? "justify-between" : "justify-end"
-                  }`}
-                >
-                  {item?.feedback && (
+                <div className={`flex items-center justify-end gap-6`}>
+                  {item?.status === "denied" && item?.feedback && (
                     <label
                       htmlFor="showFeedbackModal"
                       onClick={() => setSelectedItem(item)}
