@@ -1,12 +1,16 @@
 import img from "../../assets/slider/slider-03.png";
 import arrow from "../../assets/slider/arrow.png";
-import icon from "../../assets/features-icon.png";
 import { MdOutlineEventSeat, MdOutlineSportsGymnastics } from "react-icons/md";
 import { GiGuitar } from "react-icons/gi";
+import { useSpring, animated } from "@react-spring/web";
 
 const Features = () => {
+  const springs = useSpring({
+    from: { x: 0 },
+    to: { x: 50 },
+  });
   return (
-    <section className="section lg:grid grid-cols-2 items-center lg:pb-32 pb-5">
+    <section className="section lg:grid grid-cols-2 items-center">
       <div className="lg:-mr-20 hidden lg:block">
         <img src={img} alt="" className="w-full" />
       </div>
@@ -15,9 +19,12 @@ const Features = () => {
           Get Moving With Us
         </h3>
         <div className="lg:space-y-24 space-y-20 relative">
-          <div className="lg:flex items-end gap-10 lg:relative right-24">
+          <animated.div
+            style={{ ...springs }}
+            className="lg:flex items-end gap-10 lg:relative right-24"
+          >
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-gray-300 border-4 border-priColor rounded-full">
+              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <MdOutlineEventSeat />
               </div>
               <h4 className="my-3 text-2xl font-bold">Join Our Class</h4>
@@ -31,15 +38,18 @@ const Features = () => {
               alt=""
               className="rotate-180 w-20 hidden lg:block"
             />
-          </div>
-          <div className="lg:flex items-end gap-10 lg:relative right-0">
+          </animated.div>
+          <animated.div
+            style={{ ...springs }}
+            className="lg:flex items-end gap-10 lg:relative right-0"
+          >
             <img
               src={arrow}
               alt=""
               className="rotate-90 w-20 hidden lg:block"
             />
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-gray-300 border-4 border-priColor rounded-full">
+              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <GiGuitar />
               </div>
               <h4 className="my-3 text-2xl font-bold">Dance Choreography</h4>
@@ -48,10 +58,14 @@ const Features = () => {
                 styles.
               </p>
             </div>
-          </div>
-          <div className="lg:flex items-end gap-10 lg:relative right-24">
+          </animated.div>
+          <animated.div
+            style={{ ...springs }}
+            v
+            className="lg:flex items-end gap-10 lg:relative right-24"
+          >
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-gray-300 border-4 border-priColor rounded-full">
+              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <MdOutlineSportsGymnastics />
               </div>
               <h4 className="my-3 text-2xl font-bold">Perform Onstage</h4>
@@ -60,7 +74,7 @@ const Features = () => {
                 garner worldwide recognition.
               </p>
             </div>
-          </div>
+          </animated.div>
         </div>
       </div>
     </section>

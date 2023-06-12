@@ -4,13 +4,17 @@ import useAuth from "../../hooks/useAuth";
 import useAdmin from "./../../hooks/useAdmin";
 import useInstructor from "./../../hooks/useInstructor";
 import { useNavigate } from "react-router-dom";
+import { useSpring, animated } from "@react-spring/web";
 
 const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
   const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  // console.log("ClassCard--", "isAdmin", isAdmin, "isInstructor", isInstructor);
   const navigate = useNavigate();
+  const springs = useSpring({
+    from: { y: 0 },
+    to: { y: 50 },
+  });
   const handleSelectClass = (selectItem) => {
     if (!user) {
       return navigate("/login");
@@ -77,7 +81,8 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
     });
   };
   return (
-    <div
+    <animated.div
+      style={{ ...springs }}
       className={
         item?.availableSeats === 0
           ? "border-2 border-red-500 bg-[#fa00002b] card rounded-none hover:shadow-2xl shadow-xl font-semibold lg:mt-0 mt-4"
@@ -136,13 +141,13 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           <button
             onClick={() => handleSelectClass(item)}
             disabled={item?.availableSeats === 0 || isAdmin || isInstructor}
-            className="btn-sm glass w-1/2 mx-auto shadow-xl border-4"
+            className="btn-sm glass w-1/2 mx-auto shadow-xl border-4 disabled:bg-gray-700 disabled:opacity-50"
           >
             Select the Class
           </button>
         )}
       </div>
-    </div>
+    </animated.div>
   );
 };
 

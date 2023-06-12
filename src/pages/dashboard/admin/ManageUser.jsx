@@ -95,58 +95,60 @@ const ManageUser = () => {
               Total User: {users.length < 9 ? `0${users.length}` : users.length}
             </h4>
           </div>
-          <table className="table overflow-x-auto table-zebra w-full border">
-            <thead>
-              <tr>
-                <th className="lg:text-xl">#</th>
-                <th className="lg:text-xl">Name</th>
-                <th className="lg:text-xl">Email</th>
-                <th className="lg:text-xl">Rule</th>
-                <th className="lg:text-xl">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users?.map((user, index) => (
-                <tr key={user._id} className="font-bold">
-                  <th>{index + 1}</th>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    {user?.rule === "admin" ? (
-                      "Admin"
-                    ) : (
-                      <div className="flex gap-2 ">
-                        <button
-                          disabled={user?.rule === "instructor"}
-                          data-tip="Make Instructor"
-                          onClick={() => handleMakeInstructor(user)}
-                          className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
-                        >
-                          <GiTeacher />
-                        </button>
-
-                        <button
-                          data-tip="Make Admin"
-                          onClick={() => handleMakeAdmin(user)}
-                          className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
-                        >
-                          <FaUserShield />
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(user)}
-                      className="btn btn-ghost bg-red-600 btn-xs w-10 h-10 text-xl text-white hover:bg-red-500"
-                    >
-                      <FaTrash />
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="table table-zebra w-full border table-pin-rows table-pin-cols lg:text-lg text-xs">
+              <thead>
+                <tr>
+                  <th className="lg:text-xl">#</th>
+                  <th className="lg:text-xl">Name</th>
+                  <th className="lg:text-xl">Email</th>
+                  <th className="lg:text-xl">Rule</th>
+                  <th className="lg:text-xl">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users?.map((user, index) => (
+                  <tr key={user._id} className="font-bold">
+                    <th>{index + 1}</th>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      {user?.rule === "admin" ? (
+                        "Admin"
+                      ) : (
+                        <div className="flex gap-2 ">
+                          <button
+                            disabled={user?.rule === "instructor"}
+                            data-tip="Make Instructor"
+                            onClick={() => handleMakeInstructor(user)}
+                            className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
+                          >
+                            <GiTeacher />
+                          </button>
+
+                          <button
+                            data-tip="Make Admin"
+                            onClick={() => handleMakeAdmin(user)}
+                            className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
+                          >
+                            <FaUserShield />
+                          </button>
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(user)}
+                        className="btn btn-ghost bg-red-600 btn-xs w-10 h-10 text-xl text-white hover:bg-red-500"
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </>
