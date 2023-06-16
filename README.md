@@ -2,6 +2,7 @@
 ***Rhymove*** is a dance studio and school. Where we have world class instructor and their top rated and most valuable classes. 
 
 ### Here are some most key feature of this website:
+- Rhymove is a full-stack project.
 - You can see our popular classes and top rated instructors.
 - You can select the classes that you want to purchase. 
 - But If want to purchase a class you have to logged in first.
