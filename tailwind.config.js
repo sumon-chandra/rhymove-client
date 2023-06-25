@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        priColor: "#8c8c8c",
-        secColor: "#838383",
+        priColor: "#FFA500",
+        secColor: "#ffb52b",
       },
       fontFamily: {
         K2D: "K2D",
@@ -18,7 +18,4 @@ export default {
     },
   },
   plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["light", "dark"],
-  },
 };

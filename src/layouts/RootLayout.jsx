@@ -6,7 +6,7 @@ const RootLayout = () => {
   return (
     <>
       <Navbar />
-      <main className="pt-16">
+      <main className="bg-gradient-to-r from-white to-blue-100 py-16">
         <Outlet />
       </main>
       <Footer />

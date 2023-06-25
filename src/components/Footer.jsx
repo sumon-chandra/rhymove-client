@@ -2,7 +2,7 @@ import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <div className=" from-white to-blue-100 border-t-2">
+    <div className="bg-gradient-to-r from-white to-blue-100 border-t-2">
       <footer className="footer lg:w-1200 mx-auto p-10 text-base-content">
         <div>
           <span className="footer-title">Services</span>

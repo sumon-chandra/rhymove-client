@@ -25,18 +25,19 @@ const About = () => {
         </p>
         <ul className=" lg:mt-10 mt-6 lg:space-y-8 lg:text-2xl text-gray-700">
           <li className="flex gap-2 items-center">
-            <GiCandlebright /> <span>Personalized Dance Class Schedules</span>
+            <GiCandlebright className="text-priColor" />{" "}
+            <span>Personalized Dance Class Schedules</span>
           </li>
           <li className="flex gap-2 items-center">
-            <GiCandlebright />
+            <GiCandlebright className="text-priColor" />
             <span>Learn From 100+ Professional Dancers</span>
           </li>
           <li className="flex gap-2 items-center">
-            <GiCandlebright />
+            <GiCandlebright className="text-priColor" />
             <span>Chance To Perform On Broadway</span>
           </li>
           <li className="flex gap-2 items-center">
-            <GiCandlebright />
+            <GiCandlebright className="text-priColor" />
             <span>Attend Annual Dance Festivals</span>
           </li>
         </ul>
