@@ -6,8 +6,8 @@ import useAuth from "./../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, selectedItemToPay }) => {
-  // console.log("Selected Item to pay :", selectedItemToPay);
   const { item, refetch } = selectedItemToPay;
+  // console.log(item);
   const [cardError, setCartError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -66,6 +66,7 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
     setProcessing(false);
 
     if (paymentIntent.status === "succeeded") {
+      elements.getElement(CardElement).clear();
       setTransactionId("Payment successful!");
       const paymentInfo = {
         transactionId: paymentIntent.id,
@@ -115,7 +116,7 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
         <div className="text-center">
           <button
             type="submit"
-            disabled={!stripe || !clientSecret || processing || disableBtn}
+            disabled={!stripe || !clientSecret || processing}
             className="pay-btn btn btn-sm mt-10 w-1/2 lg:px-10 px-5 bg-priColor hover:bg-secColor border-0"
           >
             Pay

@@ -6,11 +6,9 @@ import InstructorCard from "../cards/InstructorCard";
 const PopularInstructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    axios("https://rhymove-server.vercel.app/popular-instructors").then(
-      ({ data }) => {
-        setInstructors(data);
-      }
-    );
+    axios("http://localhost:5000/popular-instructors").then(({ data }) => {
+      setInstructors(data);
+    });
   }, []);
   return (
     <section className="section">

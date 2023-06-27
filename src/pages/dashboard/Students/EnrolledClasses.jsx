@@ -33,7 +33,7 @@ const EnrolledClasses = () => {
                 <img
                   src={item?.image}
                   alt=""
-                  className="w-full h-full object-cover rounded-3xl"
+                  className="w-full h-full object-cover rounded-2xl"
                 />
               </figure>
               <div className="card-body lg:w-[60%] lg:space-y-6">

@@ -33,7 +33,7 @@ const MyClasses = () => {
                 <img
                   src={item?.image}
                   alt=""
-                  className="w-full h-full object-cover rounded-3xl"
+                  className="w-full h-full object-cover rounded-2xl"
                 />
               </figure>
               <div className="card-body lg:w-[60%]">
@@ -52,17 +52,20 @@ const MyClasses = () => {
                 >
                   {item?.status}
                 </p>
-                <div className={`flex items-center justify-end gap-6`}>
+                <div className={`flex items-center justify-end gap-2`}>
                   {item?.status === "denied" && item?.feedback && (
                     <label
                       htmlFor="showFeedbackModal"
                       onClick={() => setSelectedItem(item)}
-                      className="btn btn-sm normal-case text-xs"
+                      className="text-xs px-2 py-1 cursor-pointer bg-priColor"
                     >
                       Feedback
                     </label>
                   )}
-                  <button className="btn btn-sm normal-case text-xs">
+                  <button className="text-xs px-2 py-1 bg-priColor">
+                    Students
+                  </button>
+                  <button className="text-xs px-2 py-1 bg-priColor">
                     Update
                   </button>
                 </div>

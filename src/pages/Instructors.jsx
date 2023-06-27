@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    axios("https://rhymove-server.vercel.app/instructors").then(({ data }) =>
+    axios("http://localhost:5000/instructors").then(({ data }) =>
       setInstructors(data)
     );
   }, []);

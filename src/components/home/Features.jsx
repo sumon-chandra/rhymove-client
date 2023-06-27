@@ -19,10 +19,7 @@ const Features = () => {
           Get Moving With Us
         </h3>
         <div className="lg:space-y-24 space-y-20 relative">
-          <animated.div
-            style={{ ...springs }}
-            className="lg:flex items-end gap-10 lg:relative right-24"
-          >
+          <div className="lg:flex items-end gap-10 lg:relative lg:right-24">
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
               <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <MdOutlineEventSeat />
@@ -38,11 +35,8 @@ const Features = () => {
               alt=""
               className="rotate-180 w-20 hidden lg:block"
             />
-          </animated.div>
-          <animated.div
-            style={{ ...springs }}
-            className="lg:flex items-end gap-10 lg:relative right-0"
-          >
+          </div>
+          <div className="lg:flex items-end gap-10 lg:relative right-0">
             <img
               src={arrow}
               alt=""
@@ -58,12 +52,8 @@ const Features = () => {
                 styles.
               </p>
             </div>
-          </animated.div>
-          <animated.div
-            style={{ ...springs }}
-            v
-            className="lg:flex items-end gap-10 lg:relative right-24"
-          >
+          </div>
+          <div className="lg:flex items-end gap-10 lg:relative right-24">
             <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
               <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
                 <MdOutlineSportsGymnastics />
@@ -74,7 +64,7 @@ const Features = () => {
                 garner worldwide recognition.
               </p>
             </div>
-          </animated.div>
+          </div>
         </div>
       </div>
     </section>

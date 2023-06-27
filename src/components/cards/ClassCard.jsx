@@ -29,15 +29,13 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           enrolledStudents: selectItem.enrolledStudents,
           image: selectItem.image,
           instructorName: selectItem.instructorName,
+          instructorEmail: selectItem.instructorEmail,
           availableSeats: selectItem.availableSeats,
           price: selectItem.price,
           email: user?.email,
         };
         axios
-          .post(
-            "https://rhymove-server.vercel.app/selected-class",
-            selectedClass
-          )
+          .post("http://localhost:5000/selected-class", selectedClass)
           .then(({ data }) => {
             if (data.insertedId) {
               Swal.fire(
@@ -63,9 +61,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            `https://rhymove-server.vercel.app/selected-class/${item._id}`
-          )
+          .delete(`http://localhost:5000/selected-class/${item._id}`)
           .then(({ data }) => {
             if (data.deletedCount) {
               Swal.fire("Deleted!", "Your class has been deleted.", "success");
@@ -107,7 +103,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           Price:
           <span className="font-bold"> ${item?.price}</span>
         </p>
-        {isSelected ? (
+        {isSelected && (
           <div className="flex justify-between items-center gap-10">
             {item?.status === "paid" ? (
               <>
@@ -131,10 +127,11 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
               Delete
             </button>
           </div>
-        ) : (
+        )}
+        {!isAdmin && !isInstructor && !isSelected && (
           <button
             onClick={() => handleSelectClass(item)}
-            disabled={item?.availableSeats === 0 || isAdmin || isInstructor}
+            disabled={item?.availableSeats === 0}
             className="btn-sm bg-priColor hover:bg-secColor w-1/2 mx-auto hover:shadow-xl disabled:opacity-40 disabled:shadow-none"
           >
             Select the Class

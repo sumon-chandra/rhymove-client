@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
   // Load JWT info
   const loadJWT = (user) => {
     // axios
-    //   .post("https://rhymove-server.vercel.app/jwt", { email: user.email })
+    //   .post("http://localhost:5000/jwt", { email: user.email })
     //   .then(({ data }) => {
     //     const token = data.token;
     //     localStorage.setItem("JWT", token);
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         // loadJWT(currentUser);
         axios
-          .post("https://rhymove-server.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser?.email,
           })
           .then(({ data }) => {

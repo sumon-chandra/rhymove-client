@@ -37,7 +37,7 @@ const Login = () => {
     signInWithGoogle().then((result) => {
       const loggedUser = result.user;
       const user = { name: loggedUser.displayName, email: loggedUser.email };
-      axios.post("https://rhymove-server.vercel.app/users", user).then(() => {
+      axios.post("http://localhost:5000/users", user).then(() => {
         navigate(from);
       });
     });

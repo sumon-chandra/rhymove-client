@@ -6,11 +6,9 @@ import ClassCard from "../cards/ClassCard";
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    axios("https://rhymove-server.vercel.app/popular-classes").then(
-      ({ data }) => {
-        setClasses(data);
-      }
-    );
+    axios("http://localhost:5000/popular-classes").then(({ data }) => {
+      setClasses(data);
+    });
   }, []);
   return (
     <section className="section">

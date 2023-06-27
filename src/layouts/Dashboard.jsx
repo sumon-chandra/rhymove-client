@@ -15,7 +15,7 @@ const Dashboard = () => {
   return user ? (
     <>
       <Navbar />
-      <section className="bg-gradient-to-r from-white to-blue-100 pt-16">
+      <section className="bg-gradient-to-r from-white to-blue-100 py-16">
         <Outlet />
       </section>
       <Footer />

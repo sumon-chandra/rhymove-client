@@ -6,9 +6,7 @@ import { Helmet } from "react-helmet-async";
 const Classes = () => {
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    axios("https://rhymove-server.vercel.app/classes").then(({ data }) =>
-      setClasses(data)
-    );
+    axios("http://localhost:5000/classes").then(({ data }) => setClasses(data));
   }, []);
   return (
     <>
