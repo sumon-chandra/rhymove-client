@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, selectedItemToPay }) => {
   const { item, refetch } = selectedItemToPay;
-  // console.log(item);
+  console.log(item);
   const [cardError, setCartError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -78,6 +78,8 @@ const CheckoutForm = ({ price, selectedItemToPay }) => {
         selectedClassId: item.selectedClassId,
         paidItemName: item.name,
         createdAt: new Date(),
+        instructorName: item?.instructorName,
+        instructorEmail: item?.instructorEmail,
       };
       axiosSecure.post("/payment", paymentInfo).then(({ data }) => {
         event.target.reset();

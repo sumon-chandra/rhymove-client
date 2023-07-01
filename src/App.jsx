@@ -17,11 +17,12 @@ import Dashboard from "./layouts/Dashboard";
 // Dashboard pages
 import SelectedClasses from "./pages/dashboard/Students/SelectedClasses";
 import EnrolledClasses from "./pages/dashboard/Students/EnrolledClasses";
+import PaymentHistory from "./pages/dashboard/Students/PaymentHistory";
 import ManageUser from "./pages/dashboard/admin/ManageUser";
 import ManageClasses from "./pages/dashboard/admin/ManageClasses";
 import AddNewClass from "./pages/dashboard/instructors/AddNewClass";
 import MyClasses from "./pages/dashboard/instructors/MyClasses";
-import PaymentHistory from "./pages/dashboard/Students/PaymentHistory";
+import EnrolledStudents from "./pages/dashboard/instructors/EnrolledStudents";
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements([
@@ -41,6 +42,10 @@ const App = () => {
           <Route path="manage-classes" element={<ManageClasses />} />
           <Route path="add-new-class" element={<AddNewClass />} />
           <Route path="my-classes" element={<MyClasses />} />
+          <Route
+            path="my-classes/:id/enrolled-students"
+            element={<EnrolledStudents />}
+          />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>,

@@ -35,7 +35,10 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           email: user?.email,
         };
         axios
-          .post("http://localhost:5000/selected-class", selectedClass)
+          .post(
+            "https://rhymove-server.vercel.app/selected-class",
+            selectedClass
+          )
           .then(({ data }) => {
             if (data.insertedId) {
               Swal.fire(
@@ -61,7 +64,9 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/selected-class/${item._id}`)
+          .delete(
+            `https://rhymove-server.vercel.app/selected-class/${item._id}`
+          )
           .then(({ data }) => {
             if (data.deletedCount) {
               Swal.fire("Deleted!", "Your class has been deleted.", "success");

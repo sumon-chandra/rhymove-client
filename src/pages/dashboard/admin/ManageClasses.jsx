@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/sections/SectionTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import EmptyFile from "../../../components/sections/EmptyFile";
 
 const ManageClassCard = ({ item, setClickedItem, refetch }) => {
   const [axiosSecure] = useAxiosSecure();
@@ -162,16 +163,20 @@ const ManageClasses = () => {
       </Helmet>
       <section className="section lg:pb-32 pb-7">
         <SectionTitle value="Manage All Classes!" />
-        <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
-          {classes.map((item) => (
-            <ManageClassCard
-              key={item?._id}
-              item={item}
-              refetch={refetch}
-              setClickedItem={setClickedItem}
-            />
-          ))}
-        </div>
+        {classes?.length === 0 ? (
+          <EmptyFile />
+        ) : (
+          <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
+            {classes.map((item) => (
+              <ManageClassCard
+                key={item?._id}
+                item={item}
+                refetch={refetch}
+                setClickedItem={setClickedItem}
+              />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* *************** Feedback modal ********* */}

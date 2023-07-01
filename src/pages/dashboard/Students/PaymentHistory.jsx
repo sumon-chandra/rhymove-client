@@ -12,7 +12,6 @@ const PaymentHistory = () => {
     axiosSecure
       .get(`/payment-history?email=${user?.email}`)
       .then(({ data }) => {
-        console.log(data);
         setPaymentHistories(data);
       });
   }, []);

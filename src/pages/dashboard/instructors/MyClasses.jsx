@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import SectionTitle from "./../../../components/sections/SectionTitle";
+import { Link } from "react-router-dom";
+import EmptyFile from "../../../components/sections/EmptyFile";
 const MyClasses = () => {
   const [axiosSecure] = useAxiosSecure();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -16,6 +18,7 @@ const MyClasses = () => {
       return res.data;
     },
   });
+  // console.log(classes);
   return (
     <>
       <Helmet>
@@ -23,56 +26,63 @@ const MyClasses = () => {
       </Helmet>
       <section className="section">
         <SectionTitle value="My Classes!" />
-        <div className="lg:grid grid-cols-2 gap-20 lg:pb-32 pb-6 font-inter font-semibold">
-          {classes.map((item) => (
-            <div
-              key={item?._id}
-              className="glass rounded-3xl lg:flex flex-row shadow-2xl p-4 lg:mt-0 mt-5"
-            >
-              <figure className="lg:w-[40%]">
-                <img
-                  src={item?.image}
-                  alt=""
-                  className="w-full h-full object-cover rounded-2xl"
-                />
-              </figure>
-              <div className="card-body lg:w-[60%]">
-                <h3 className="card-title">{item?.name}</h3>
-                <p>Available Seat- {item?.availableSeats}</p>
-                <p>Enrolled Student- {item?.enrolledStudents}</p>
-                <p>Price- ${item?.price}</p>
-                <p
-                  className={`${
-                    item?.status === "denied"
-                      ? "text-red-600"
-                      : item?.status === "approved"
-                      ? "text-green-600"
-                      : "text-priColor"
-                  } font-bold capitalize italic`}
-                >
-                  {item?.status}
-                </p>
-                <div className={`flex items-center justify-end gap-2`}>
-                  {item?.status === "denied" && item?.feedback && (
-                    <label
-                      htmlFor="showFeedbackModal"
-                      onClick={() => setSelectedItem(item)}
-                      className="text-xs px-2 py-1 cursor-pointer bg-priColor"
+        {classes.length === 0 ? (
+          <EmptyFile />
+        ) : (
+          <div className="lg:grid grid-cols-2 gap-20 lg:pb-32 pb-6 font-inter font-semibold">
+            {classes.map((item) => (
+              <div
+                key={item?._id}
+                className="glass rounded-3xl lg:flex flex-row shadow-2xl p-4 lg:mt-0 mt-5"
+              >
+                <figure className="lg:w-[40%]">
+                  <img
+                    src={item?.image}
+                    alt=""
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+                </figure>
+                <div className="card-body lg:w-[60%]">
+                  <h3 className="card-title">{item?.name}</h3>
+                  <p>Available Seat- {item?.availableSeats}</p>
+                  <p>Enrolled Student- {item?.enrolledStudents}</p>
+                  <p>Price- ${item?.price}</p>
+                  <p
+                    className={`${
+                      item?.status === "denied"
+                        ? "text-red-600"
+                        : item?.status === "approved"
+                        ? "text-green-600"
+                        : "text-priColor"
+                    } font-bold capitalize italic`}
+                  >
+                    {item?.status}
+                  </p>
+                  <div className={`flex items-center justify-end gap-2`}>
+                    {item?.status === "denied" && item?.feedback && (
+                      <label
+                        htmlFor="showFeedbackModal"
+                        onClick={() => setSelectedItem(item)}
+                        className="text-xs px-2 py-1 cursor-pointer bg-priColor"
+                      >
+                        Feedback
+                      </label>
+                    )}
+                    <Link
+                      to={`/dashboard/my-classes/${item?._id}/enrolled-students`}
+                      className="text-xs px-2 py-1 bg-priColor"
                     >
-                      Feedback
-                    </label>
-                  )}
-                  <button className="text-xs px-2 py-1 bg-priColor">
-                    Students
-                  </button>
-                  <button className="text-xs px-2 py-1 bg-priColor">
-                    Update
-                  </button>
+                      Students
+                    </Link>
+                    <button className="text-xs px-2 py-1 bg-priColor">
+                      Update
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
       {/* ********** Modal for display feedback ********** */}
       <input type="checkbox" id="showFeedbackModal" className="modal-toggle" />

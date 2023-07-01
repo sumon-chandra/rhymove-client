@@ -40,9 +40,11 @@ const Register = () => {
             const photoURL = data.display_url;
             userInfo(userData.name, photoURL).then(() => {
               const user = { name: userData.name, email: userData.email };
-              axios.post("http://localhost:5000/users", user).then((res) => {
-                console.log(res.data);
-              });
+              axios
+                .post("https://rhymove-server.vercel.app/users", user)
+                .then((res) => {
+                  console.log(res.data);
+                });
             });
           })
           .catch((err) => {
@@ -61,9 +63,11 @@ const Register = () => {
     signInWithGoogle().then((result) => {
       const loggedUser = result.user;
       const user = { name: loggedUser.displayName, email: loggedUser.email };
-      axios.post("http://localhost:5000/users", user).then(({ data }) => {
-        console.log(data);
-      });
+      axios
+        .post("https://rhymove-server.vercel.app/users", user)
+        .then(({ data }) => {
+          console.log(data);
+        });
     });
   };
 
