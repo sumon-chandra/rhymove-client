@@ -11,11 +11,11 @@ const InstructorCard = ({ instructor, index }) => {
         <img
           src={instructor.image}
           alt={instructor.name}
-          className="object-cover h-52 rounded-b-[4rem]"
+          className="object-cover h-52 rounded-b-[4rem] z-10"
         />
       </figure>
 
-      <div className="ps-4 py-8 text-center">
+      <div className="ps-4 py-8 text-center z-0">
         <h5 className="font-bold text-xl">{instructor.name}</h5>
         <p className="text-xs">Email: {instructor.email}</p>
       </div>

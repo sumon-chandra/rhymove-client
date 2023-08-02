@@ -4,6 +4,7 @@ import Features from "../components/home/Features";
 import PopularClasses from "../components/home/PopularClasses";
 import PopularInstructors from "../components/home/PopularInstructors";
 import Slider from "../components/home/Slider";
+import BestFeatures from "../components/home/BestFeatures";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <PopularInstructors />
       <About />
       <Features />
+      <BestFeatures />
     </div>
   );
 };
