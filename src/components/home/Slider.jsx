@@ -12,14 +12,10 @@ const Slider = () => {
         spaceBetween={30}
         centeredSlides={true}
         loop={true}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination, Autoplay]}
+        modules={[Pagination]}
         className="mySwiper font-K2D"
       >
         <SwiperSlide>

@@ -4,8 +4,18 @@ import logo from "../../assets/logo.png";
 import useAuth from "../../hooks/useAuth";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  // ! Navbar animation - When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar
+  const [previousScrollPos, setPreviousScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const handleScrolling = () => {
+    const currentScrollPos = window.pageYOffset;
+    setVisible(previousScrollPos > currentScrollPos);
+    setPreviousScrollPos(currentScrollPos);
+  };
+
   const { user, logoutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
@@ -97,9 +107,19 @@ const Navbar = () => {
       navigate("/login");
     });
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScrolling);
+    return () => window.addEventListener("scroll", handleScrolling);
+  }, [previousScrollPos, visible]);
+
   return (
-    <div className="fixed w-full my-glass z-30">
-      <div className="lg:w-1200 mx-auto navbar">
+    <nav
+      className={`fixed w-full my-glass z-30 transition-all ${
+        visible ? "top-0 duration-300" : "-top-full duration-300"
+      }`}
+    >
+      <div className={`lg:w-1200 mx-auto navbar`}>
         <div className="navbar-start">
           <div className="dropdown">
             <label
@@ -154,7 +174,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
