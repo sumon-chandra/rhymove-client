@@ -2,13 +2,8 @@ import img from "../../assets/slider/slider-03.png";
 import arrow from "../../assets/slider/arrow.png";
 import { MdOutlineEventSeat, MdOutlineSportsGymnastics } from "react-icons/md";
 import { GiGuitar } from "react-icons/gi";
-import { useSpring, animated } from "@react-spring/web";
 
 const Features = () => {
-  const springs = useSpring({
-    from: { x: 0 },
-    to: { x: 50 },
-  });
   return (
     <section className="section lg:grid grid-cols-2 items-center">
       <div className="lg:-mr-20 hidden lg:block">

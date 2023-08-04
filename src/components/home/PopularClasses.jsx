@@ -16,8 +16,8 @@ const PopularClasses = () => {
     <section className="section">
       <SectionTitle value="Our Popular Classes!" />
       <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
-        {classes.map((item) => (
-          <ClassCard key={item?._id} item={item} />
+        {classes.map((item, index) => (
+          <ClassCard key={item?._id} item={item} index={index} />
         ))}
       </div>
     </section>

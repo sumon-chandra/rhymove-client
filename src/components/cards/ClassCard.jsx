@@ -5,7 +5,13 @@ import useAdmin from "./../../hooks/useAdmin";
 import useInstructor from "./../../hooks/useInstructor";
 import { useNavigate } from "react-router-dom";
 
-const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
+const ClassCard = ({
+  item,
+  isSelected,
+  refetch,
+  setSelectedItemToPay,
+  index,
+}) => {
   const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
@@ -76,16 +82,15 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
       }
     });
   };
+
   return (
     <div
-      className={
-        item?.availableSeats === 0
-          ? "border-2 border-red-500 bg-[#fa00002b] card rounded-none hover:shadow-2xl shadow-xl font-semibold lg:mt-0 mt-4"
-          : `card border-0 rounded-none hover:shadow-2xl shadow-xl font-semibold lg:mt-0 mt-4`
-      }
+      data-aos="fade-up"
+      data-aos-duration={`${index % 2 === 0 ? "1400" : "500"}`}
+      className="mt-4 font-semibold bg-white border-0 rounded-none shadow-md card lg:mt-0"
     >
       <figure>
-        <img src={item?.image} alt="" className="w-full h-60 object-cover" />
+        <img src={item?.image} alt="" className="object-cover w-full h-60" />
       </figure>
       <div className="card-body">
         <h3 className="card-title">{item?.name}</h3>
@@ -109,10 +114,10 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           <span className="font-bold"> ${item?.price}</span>
         </p>
         {isSelected && (
-          <div className="flex justify-between items-center gap-10">
+          <div className="flex items-center justify-between gap-10">
             {item?.status === "paid" ? (
               <>
-                <label className="btn-sm pt-1 text-center bg-gray-500 w-1/2 mx-auto text-white">
+                <label className="w-1/2 pt-1 mx-auto text-center text-white bg-gray-500 btn-sm">
                   Paid
                 </label>
               </>
@@ -120,14 +125,14 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
               <label
                 htmlFor="payModal"
                 onClick={() => setSelectedItemToPay({ item, refetch })}
-                className="btn-sm cursor-pointer pt-1 text-center bg-priColor w-1/2 mx-auto text-white"
+                className="w-1/2 pt-1 mx-auto text-center text-white cursor-pointer btn-sm bg-priColor"
               >
                 Pay
               </label>
             )}
             <button
               onClick={() => handleDelete(item)}
-              className="btn-sm bg-red-500 w-1/2 mx-auto text-white"
+              className="w-1/2 mx-auto text-white bg-red-500 btn-sm"
             >
               Delete
             </button>
@@ -137,7 +142,7 @@ const ClassCard = ({ item, isSelected, refetch, setSelectedItemToPay }) => {
           <button
             onClick={() => handleSelectClass(item)}
             disabled={item?.availableSeats === 0}
-            className="btn-sm bg-priColor hover:bg-secColor w-1/2 mx-auto hover:shadow-xl disabled:opacity-40 disabled:shadow-none"
+            className="w-1/2 mx-auto text-white btn-sm bg-priColor hover:bg-secColor disabled:opacity-40 disabled:shadow-none"
           >
             Select the Class
           </button>

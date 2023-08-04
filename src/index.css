@@ -18,6 +18,7 @@
 /* !!!!!!!!!!! My Custom Glass Background !!!!!!!!!!*/
 .my-glass {
   backdrop-filter: blur(30px);
+  background-color: #0037ff1b;
   -webkit-backdrop-filter: blur(9px);
 }
 
