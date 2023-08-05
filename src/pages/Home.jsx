@@ -5,6 +5,7 @@ import PopularClasses from "../components/home/PopularClasses";
 import PopularInstructors from "../components/home/PopularInstructors";
 import Slider from "../components/home/Slider";
 import BestFeatures from "../components/home/BestFeatures";
+import Banner from "../components/home/Banner";
 
 const Home = () => {
   return (
@@ -12,7 +13,8 @@ const Home = () => {
       <Helmet>
         <title>Home - Rhymove Dance Studio & School</title>
       </Helmet>
-      <Slider />
+      {/* <Slider /> */}
+      <Banner />
       <PopularClasses />
       <PopularInstructors />
       <About />

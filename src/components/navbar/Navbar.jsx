@@ -115,7 +115,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full my-glass z-30 transition-all ${
+      className={`fixed w-full my-glass z-50 transition-all ${
         visible ? "top-0 duration-300" : "-top-full duration-300"
       }`}
     >
@@ -124,33 +124,33 @@ const Navbar = () => {
           <div className="dropdown">
             <label
               tabIndex={0}
-              className="mt-12 text-2xl glass rounded-lg lg:hidden"
+              className="mt-12 text-2xl rounded-lg glass lg:hidden"
             >
               <MdMenu />
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm glass dropdown-content mt-3 p-4 shadow bg-base-100 rounded-box w-52 nav gap-4"
+              className="gap-4 p-4 mt-3 shadow menu menu-sm glass dropdown-content bg-base-100 rounded-box w-52 nav"
             >
               {navOptions}
             </ul>
           </div>
-          <div className="lg:text-2xl text-lg lg:ms-0 ms-4 flex items-center font-K2D cursor-pointer select-none">
+          <div className="flex items-center text-lg cursor-pointer select-none lg:text-2xl lg:ms-0 ms-4 font-K2D">
             <img src={logo} className="w-10" alt="" />
             <div className="font-black">
               <span>Rhymove</span> <p className="text-xs">Dance School</p>
             </div>
           </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 nav gap-4">{navOptions}</ul>
+        <div className="hidden navbar-center lg:flex">
+          <ul className="gap-4 px-1 menu menu-horizontal nav">{navOptions}</ul>
         </div>
         <div className="navbar-end">
           {user ? (
             <>
               <button
                 onClick={handleLogout}
-                className="btn-sm rounded-lg bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
+                className="font-bold normal-case rounded-lg btn-sm bg-priColor hover:bg-secColor font-K2D"
               >
                 Logout
               </button>
@@ -158,16 +158,16 @@ const Navbar = () => {
           ) : (
             <Link
               to="/login"
-              className="btn-sm pt-1 rounded-lg bg-priColor hover:bg-secColor font-bold font-K2D normal-case"
+              className="pt-1 font-bold normal-case rounded-lg btn-sm bg-priColor hover:bg-secColor font-K2D"
             >
               Login
             </Link>
           )}
           {user && (
-            <button className="btn btn-ghost rounded-full">
+            <button className="rounded-full btn btn-ghost">
               <img
                 src={user.photoURL}
-                className="w-10 h-10 rounded-full object-cover"
+                className="object-cover w-10 h-10 rounded-full"
                 alt="user photo"
               />{" "}
             </button>

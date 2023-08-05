@@ -21,9 +21,9 @@ const InstructorCard = ({ instructor, index }) => {
         <h5 className="font-bold">{instructor.name}</h5>
         <p className="text-xs">{instructor.email}</p>
         <div className="flex justify-center gap-3">
-          <FaFacebook className="cursor-pointer hover:text-[#ffa500]" />
-          <FaInstagramSquare className="cursor-pointer hover:text-[#ffa500]" />
-          <FaYoutube className="cursor-pointer hover:text-[#ffa500]" />
+          <FaFacebook className="cursor-pointer hover:text-priColor" />
+          <FaInstagramSquare className="cursor-pointer hover:text-priColor" />
+          <FaYoutube className="cursor-pointer hover:text-priColor" />
         </div>
       </div>
     </div>

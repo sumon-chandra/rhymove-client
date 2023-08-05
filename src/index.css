@@ -8,10 +8,10 @@
 /* !!!!!!!!! Layer Components !!!!!! */
 @layer components {
   .section {
-    @apply lg:w-1200 mx-auto px-4 lg:px-0 lg:mt-20 mt-8;
+    @apply px-4 mx-auto mt-8 lg:w-1200 lg:px-0 lg:mt-20;
   }
   .nav-item {
-    @apply bg-transparent hover:bg-transparent rounded-none p-0 lg:pb-2 font-semibold;
+    @apply p-0 font-semibold bg-transparent rounded-none hover:bg-transparent lg:pb-2;
   }
 }
 
@@ -30,4 +30,12 @@
 }
 .nav > li > a:hover {
   color: #ffa500;
+}
+.banner-title {
+  background-image: url("../src/assets/text-bg.jpg");
+  background-position: right;
+  background-size: 10em;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  /* background-clip: unset; */
 }
