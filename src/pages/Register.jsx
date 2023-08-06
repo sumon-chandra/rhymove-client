@@ -3,13 +3,16 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { FaGoogle, FaImages } from "react-icons/fa";
-import loginImg from "../assets/signup_bg.svg";
+import { FaGoogle, FaImages, FaEye, FaEyeSlash } from "react-icons/fa";
+import loginImg from "../assets/img-2.png";
 import { AuthContext } from "../context-provider/AuthProvider";
 import axios from "axios";
+
 const Register = () => {
-  const { signInWithGoogle, userInfo, createNewUser } = useContext(AuthContext);
+  const { signInWithGoogle, userInfo, createNewUser, loading } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
+  const [showPass, setShowPass] = useState(false);
   const {
     register,
     handleSubmit,
@@ -70,149 +73,174 @@ const Register = () => {
         });
     });
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
-      <section className=" pt-10">
-        <div className="lg:w-1200 mx-auto px-4 lg:px-0 min-h-screen bg-transparent">
-          <div className="lg:flex justify-evenly items-center gap-x-10">
+      <Helmet>
+        <title>Sign up - Rhymove Dance Studio & School</title>
+      </Helmet>
+      <section className="relative pt-10">
+        <div className="min-h-screen px-4 mx-auto bg-transparent lg:w-1200 lg:px-0">
+          <div className="items-center lg:flex justify-evenly gap-x-10">
             <form
               onSubmit={handleSubmit(handleRegister)}
-              className="card-body font-inter bg-white"
+              className="relative z-20 bg-white border rounded-lg shadow-md card-body font-inter border-priColor shadow-priColor lg:w-1/2"
             >
               <div className="text-center">
-                <h4 className="text-3xl font-bold">Register</h4>
+                <h4 className="text-3xl font-bold">Sign up</h4>
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-bold text-xl">Name</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("name", { required: true })}
-                  placeholder="Enter Your Name"
-                  className="input input-bordered"
-                />
-                {errors.name && (
-                  <span className="text-red-400 text-xs font-semibold mt-2">
-                    This field is required
-                  </span>
-                )}
+              <div className="flex flex-col gap-4">
+                {/* ================ Name =========== */}
+                <div>
+                  <input
+                    type="text"
+                    {...register("name", { required: true })}
+                    placeholder="Name"
+                    className="contact-input"
+                  />
+                  {errors.name && (
+                    <span className="text-xs font-semibold text-red-400">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+                {/* ================= Email =========== */}
+                <div>
+                  <input
+                    type="email"
+                    {...register("email", { required: true })}
+                    placeholder="Email"
+                    className="contact-input"
+                  />
+                  {errors.name && (
+                    <span className="text-xs font-semibold text-red-400">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+                {/* ============== Password ============== */}
+                <div>
+                  <input
+                    type={showPass ? "text" : "password"}
+                    className="contact-input"
+                    placeholder="Password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters long",
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/,
+                        message: "Password must match the specified pattern",
+                      },
+                    })}
+                  />
+                  {errors.password && (
+                    <p className="text-xs font-semibold text-red-400">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                {/* ======== Confirm Password =========== */}
+                <div>
+                  <input
+                    type={showPass ? "text" : "password"}
+                    className="contact-input"
+                    placeholder="Confirm Password"
+                    {...register("confirmPassword", {
+                      required: "Confirm Password is required",
+                      validate: (value) =>
+                        value === password.current ||
+                        "The passwords do not match",
+                    })}
+                  />
+                  {errors.confirmPassword && (
+                    <p className="text-xs font-semibold text-red-400">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                </div>
+                {/* ============ Add Image =========== */}
+                <div className="relative">
+                  <input
+                    {...register("image", { required: true })}
+                    type="file"
+                    id="file"
+                    className="w-[0.0001px]"
+                  />
+                  <label
+                    htmlFor="file"
+                    className="absolute top-0 left-0 flex items-center gap-2 p-4 border-2 rounded-lg contact-input"
+                  >
+                    <FaImages />
+                    <span>Add profile picture.</span>
+                  </label>
+                  {error && (
+                    <span className="mt-2 text-xs font-semibold text-red-400">
+                      {error}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-bold text-xl">Email</span>
-                </label>
-                <input
-                  type="email"
-                  {...register("email", { required: true })}
-                  placeholder="Enter Your Email"
-                  className="input input-bordered"
-                />
-                {errors.name && (
-                  <span className="text-red-400 text-xs font-semibold mt-2">
-                    This field is required
-                  </span>
-                )}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-bold text-xl">Password</span>
-                </label>
-                <input
-                  type="password"
-                  className="input input-bordered"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters long",
-                    },
-                    pattern: {
-                      value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/,
-                      message: "Password must match the specified pattern",
-                    },
-                  })}
-                />
-                {errors.password && (
-                  <p className="text-red-400 text-xs font-semibold mt-2">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-bold text-xl">
-                    Confirm Password
-                  </span>
-                </label>
-                <input
-                  type="password"
-                  className="input input-bordered"
-                  {...register("confirmPassword", {
-                    required: "Confirm Password is required",
-                    validate: (value) =>
-                      value === password.current ||
-                      "The passwords do not match",
-                  })}
-                />
-                {errors.confirmPassword && (
-                  <p className="text-red-400 text-xs font-semibold mt-2">
-                    {errors.confirmPassword.message}
-                  </p>
-                )}
-              </div>
-              <div className="form-control">
-                <input
-                  {...register("image", { required: true })}
-                  type="file"
-                  id="file"
-                  className="w-[0.0001px]"
-                />
-                <label
-                  htmlFor="file"
-                  className="border-2 rounded-lg p-4 flex items-center gap-2"
-                >
-                  <FaImages />
-                  <span>Add profile picture.</span>
-                </label>
-              </div>
-              {error && (
-                <span className="text-red-400 text-xs font-semibold mt-2">
-                  {error}
-                </span>
-              )}
-              <div className="form-control mt-6">
+              {/* ======== Submit btn ============== */}
+              <div className="mt-20 form-control">
                 <input
                   disabled={!watch("confirmPassword")}
                   type="submit"
-                  value="Register"
-                  className="btn btn-sm lg:btn-md bg-priColor hover:bg-secColor normal-case border-0 text-white lg:text-xl shadow-lg"
+                  value={
+                    loading ? "Please Wait" : error ? "Sign up" : "Sign up"
+                  }
+                  className="contact-btn"
                 />
               </div>
+              {/* ========== Navigator and Google sign in ========= */}
               <div className="text-xs text-primaryColor">
                 <p className="font-semibold">
                   Already have an account?{" "}
-                  <Link to="/login" className="font-bold underline">
+                  <Link
+                    to="/login"
+                    className="font-bold underline text-priColor"
+                  >
                     Login now
                   </Link>
                 </p>
                 <div
                   onClick={handleGoogleLogin}
-                  className="bg-slate-200 font-semibold text-sm select-none cursor-pointer flex justify-center items-center gap-2 mt-6 w-4/6 rounded-2xl py-1 mx-auto"
+                  className="flex items-center justify-center gap-2 py-2 mx-auto mt-6 text-xs font-semibold bg-white border cursor-pointer select-none text-priColor border-priColor lg:w-4/6 rounded-2xl"
                 >
                   <span>Or register with google</span>
                   <FaGoogle className="cursor-pointer" />
                 </div>
               </div>
+              {/* -------- Password Show/Hide btn ---------- */}
+              <span className="absolute text-lg cursor-pointer bottom-40 right-8">
+                {showPass ? (
+                  <button
+                    onClick={() => setShowPass(false)}
+                    className="text-xs my-btn"
+                  >
+                    Hide Password
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowPass(true)}
+                    className="text-xs my-btn"
+                  >
+                    Show Password
+                  </button>
+                )}
+              </span>
             </form>
-            <img
-              src={loginImg}
-              alt=""
-              className="w-1/2 hidden lg:block bg-transparent"
-            />
+            <figure className="hidden w-1/2 lg:block">
+              <img src={loginImg} alt="" className="w-4/6 ms-auto" />
+            </figure>
           </div>
         </div>
+        <div className="absolute hidden lg:block w-20 h-[400px] bg-priColor left-0 bottom-52 blur-[90px] rotate-45"></div>
+        <div className="absolute hidden lg:block w-20 h-[400px] bg-purple-700 right-0 bottom-10 blur-[120px] "></div>
       </section>
     </>
   );

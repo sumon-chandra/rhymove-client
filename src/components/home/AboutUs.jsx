@@ -19,7 +19,7 @@ const AboutUs = () => {
       <div className="grid-cols-2 mt-6 space-y-6 lg:mt-20 gap-x-10 gap-y-20 lg:grid lg:space-y-0">
         <div
           data-aos-duration="1000"
-          data-aos="fade-down-right"
+          data-aos="fade-up"
           className="about-cart group"
         >
           <div className="about-icon-container group-hover:bg-white">
@@ -37,7 +37,7 @@ const AboutUs = () => {
         </div>
         <div
           data-aos-duration="1000"
-          data-aos="fade-down-left"
+          data-aos="fade-up"
           className="about-cart group"
         >
           <div className="about-icon-container group-hover:bg-white">
@@ -55,7 +55,7 @@ const AboutUs = () => {
         </div>
         <div
           data-aos-duration="1000"
-          data-aos="fade-up-right"
+          data-aos="fade-up"
           className="about-cart group"
         >
           <div className="about-icon-container group-hover:bg-white">
@@ -73,7 +73,7 @@ const AboutUs = () => {
         </div>
         <div
           data-aos-duration="1000"
-          data-aos="fade-up-left"
+          data-aos="fade-up"
           className="about-cart group"
         >
           <div className="about-icon-container group-hover:bg-white">
