@@ -99,6 +99,11 @@ const Navbar = () => {
           Instructors
         </NavLink>
       </li>
+      <li>
+        <NavLink className="nav-item" to="/about-us">
+          About Us
+        </NavLink>
+      </li>
     </>
   );
   const navigate = useNavigate();
