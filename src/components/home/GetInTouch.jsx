@@ -51,7 +51,7 @@ const GetInTouch = () => {
           rows="5"
           placeholder="Message"
         ></textarea>
-        <input type="submit" value="Submit" className="my-btn" />
+        <input type="submit" value="Submit" className="contact-btn" />
       </form>
       <div className="absolute hidden lg:block right-32 blur-[120px] w-20 -rotate-45 -bottom-20 h-[500px] bg-purple-600 z-1"></div>
     </section>

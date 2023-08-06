@@ -135,11 +135,8 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <div className="flex items-center text-lg cursor-pointer select-none lg:text-2xl lg:ms-0 ms-4 font-K2D">
-            <img src={logo} className="w-10" alt="" />
-            <div className="font-black">
-              <span>Rhymove</span> <p className="text-xs">Dance School</p>
-            </div>
+          <div className="text-3xl text-black cursor-pointer select-none font-K2D">
+            <h3 className="font-black uppercase">Rhymove</h3>
           </div>
         </div>
         <div className="hidden navbar-center lg:flex">
@@ -148,29 +145,14 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <button
-                onClick={handleLogout}
-                className="font-bold normal-case rounded-lg btn-sm bg-priColor hover:bg-secColor font-K2D"
-              >
+              <button onClick={handleLogout} className="navbar-btn">
                 Logout
               </button>
             </>
           ) : (
-            <Link
-              to="/login"
-              className="pt-1 font-bold normal-case rounded-lg btn-sm bg-priColor hover:bg-secColor font-K2D"
-            >
+            <Link to="/login" className="navbar-btn">
               Login
             </Link>
-          )}
-          {user && (
-            <button className="rounded-full btn btn-ghost">
-              <img
-                src={user.photoURL}
-                className="object-cover w-10 h-10 rounded-full"
-                alt="user photo"
-              />{" "}
-            </button>
           )}
         </div>
       </div>

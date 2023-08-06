@@ -1,42 +1,35 @@
-import logo from "../assets/logo.png";
-
 const Footer = () => {
   return (
-    <div className="bg-gradient-to-r from-white to-blue-100 border-t-2">
-      <footer className="footer lg:w-1200 mx-auto p-10 text-base-content">
-        <div>
+    <div className="border-t-2 main-footer bg-priColor">
+      <footer className="grid-cols-6 p-4 mx-auto lg:p-10 footer lg:w-1200 text-base-content">
+        <div className="col-span-3 font-semibold text-white lg:col-span-2">
           <span className="footer-title">Services</span>
           <a className="link link-hover">Branding</a>
           <a className="link link-hover">Design</a>
           <a className="link link-hover">Marketing</a>
           <a className="link link-hover">Advertisement</a>
         </div>
-        <div>
+        <div className="col-span-3 font-semibold text-white lg:col-span-2">
           <span className="footer-title">Company</span>
           <a className="link link-hover">About us</a>
           <a className="link link-hover">Contact</a>
           <a className="link link-hover">Jobs</a>
           <a className="link link-hover">Press kit</a>
         </div>
-        <div>
+        <div className="col-span-6 font-semibold text-white">
           <span className="footer-title">Address</span>
           <a className="link link-hover">634 Campbell St,</a>
           <a className="link link-hover">Tofinno BC</a>
-          <a className="link link-hover font-semibold">
-            <span className="font-bold">P :</span> 774 4567333
-          </a>
-          <a className="link link-hover font-semibold">
-            <span className="font-bold">E :</span> rhymove@gmail.com
+          <a className="font-semibold link link-hover">Phone: +774 4567333</a>
+          <a className="font-semibold link link-hover">
+            Email: rhymove@gmail.com
           </a>
         </div>
       </footer>
-      <footer className="footer lg:w-1200 mx-auto lg:px-10 px-4 py-4 border-t text-base-content border-base-300">
-        <div className=" grid-flow-col space-x-4 flex lg:flex-row flex-col">
-          <div className="lg:text-2xl text-lg flex items-center font-K2D cursor-pointer select-none">
-            <img src={logo} className="w-10" alt="" />
-            <div className="font-black">
-              <span>Rhymove</span> <p className="text-xs">Dance School</p>
-            </div>
+      <footer className="p-4 mx-auto text-white border-t footer lg:w-1200 lg:px-10 border-base-300">
+        <div className="flex flex-col grid-flow-col lg:space-x-4 lg:flex-row">
+          <div className="text-3xl text-black cursor-pointer select-none font-K2D">
+            <h3 className="font-black uppercase">Rhymove</h3>
           </div>
           <p>
             ACME Industries Ltd. <br />
@@ -44,8 +37,8 @@ const Footer = () => {
           </p>
         </div>
         <div className="md:place-self-center md:justify-self-end">
-          <div className="grid grid-flow-col gap-4">
-            <a>
+          <div className="grid w-full grid-flow-col gap-4">
+            <a className="footer-social-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -56,7 +49,7 @@ const Footer = () => {
                 <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
               </svg>
             </a>
-            <a>
+            <a className="footer-social-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -67,7 +60,7 @@ const Footer = () => {
                 <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
               </svg>
             </a>
-            <a>
+            <a className="footer-social-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -81,7 +74,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <p className="footer-center p-4 text-base-content">
+      <p className="p-4 text-white footer-center">
         Copyright © 2023 - All right reserved by ACME Industries Ltd
       </p>
     </div>

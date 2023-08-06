@@ -16,8 +16,8 @@ const AboutClass = () => {
           Sign Up for Classes
         </h3>
         <img
-          data-aos="fade-up"
-          data-aos-duration="700"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
           src={img}
           alt=""
           className="w-4/5 mx-auto rounded-full shadow-2xl lg:w-96"
@@ -35,35 +35,28 @@ const AboutClass = () => {
           className="mt-6 text-gray-700 lg:mt-10 lg:space-y-8 lg:text-2xl"
         >
           <li className="flex items-center gap-2">
-            <GiCandlebright className="text-priColor" />{" "}
-            <span>Personalized Dance Class Schedules</span>
+            <GiCandlebright /> <span>Personalized Dance Class Schedules</span>
           </li>
           <li className="flex items-center gap-2">
-            <GiCandlebright className="text-priColor" />
+            <GiCandlebright />
             <span>Learn From 100+ Professional Dancers</span>
           </li>
           <li className="flex items-center gap-2">
-            <GiCandlebright className="text-priColor" />
+            <GiCandlebright />
             <span>Chance To Perform On Broadway</span>
           </li>
           <li className="flex items-center gap-2">
-            <GiCandlebright className="text-priColor" />
+            <GiCandlebright />
             <span>Attend Annual Dance Festivals</span>
           </li>
         </ul>
-        <div
+        <button
           data-aos="fade-up"
-          data-aos-duration="1000"
-          className="flex items-end gap-2 mt-6 lg:mt-14"
+          data-aos-duration="800"
+          className="mt-6 my-btn"
         >
-          <img src={arrow} alt="" className="w-6 lg:w-20" />
-          <Link
-            to="/"
-            className="text-xs font-bold normal-case rounded-lg btn btn-sm lg:btn-md lg:text-xl bg-priColor hover:bg-secColor font-K2D"
-          >
-            See more
-          </Link>
-        </div>
+          <Link to="/">See more</Link>
+        </button>
       </div>
     </section>
   );

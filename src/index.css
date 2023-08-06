@@ -7,11 +7,17 @@
 
 /* !!!!!!!!! Layer Components !!!!!! */
 @layer components {
+  .my-btn {
+    @apply w-32 px-4 py-1 text-lg font-semibold text-center text-white duration-700 border rounded-full cursor-pointer bg-priColor border-priColor hover:bg-transparent hover:text-priColor;
+  }
+  .navbar-btn {
+    @apply px-4 py-1 font-bold text-white duration-700 border rounded-full cursor-pointer bg-priColor border-priColor hover:bg-white hover:text-priColor;
+  }
   .section {
     @apply px-4 mx-auto mt-8 lg:w-1200 lg:px-0 lg:mt-20;
   }
   .nav-item {
-    @apply p-0 font-semibold bg-transparent rounded-none hover:bg-transparent lg:pb-2;
+    @apply p-0 font-semibold uppercase bg-transparent rounded-none hover:bg-transparent lg:pb-2;
   }
   /* !!!!!!!! About US section in home page !!!!!! */
   .about-cart {
@@ -25,8 +31,13 @@
   .contact-input {
     @apply px-3 py-2 font-semibold text-black bg-transparent border rounded border-priColor focus:outline-priColor;
   }
-  .my-btn {
+  .contact-btn {
     @apply w-32 py-1 mx-auto font-bold text-white duration-700 border rounded-full cursor-pointer bg-priColor border-priColor hover:bg-transparent hover:text-priColor;
+  }
+
+  /* !!!!!!!!!!!! Footer !!!!!!!!!!! */
+  .footer-social-icon {
+    @apply p-2 duration-700 border border-white rounded-full cursor-pointer hover:bg-white hover:text-priColor;
   }
 }
 
@@ -119,4 +130,10 @@
 .swiper-button-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .main-footer {
+    clip-path: circle(103.4% at 72% 190%);
+  }
 }
