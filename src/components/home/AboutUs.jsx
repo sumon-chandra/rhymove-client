@@ -5,7 +5,7 @@ import { FaShoePrints, FaSpa, FaSkating, FaWalking } from "react-icons/fa";
 const AboutUs = () => {
   return (
     <section className="relative section lg:mt-32">
-      <div className="absolute bottom-0 right-0 bg-blue-600 w-20 h-[25em] z-[1] blur-[100px]  rotate-45"></div>
+      <div className="absolute bottom-0 right-40 bg-blue-600 lg:w-96 h-[25em] z-1 blur-[200px]  lg:rotate-45"></div>
       <SectionTitle value="About us" />
       <p
         data-aos="fade-up"

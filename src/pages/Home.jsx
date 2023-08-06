@@ -7,6 +7,7 @@ import Banner from "../components/home/Banner";
 import AboutClass from "../components/home/AboutClass";
 import AboutUs from "../components/home/AboutUs";
 import Gallery from "../components/home/Gallery";
+import GetInTouch from "../components/home/GetInTouch";
 
 const Home = () => {
   return (
@@ -20,8 +21,9 @@ const Home = () => {
       <PopularInstructors />
       <AboutClass />
       <Features />
-      <Gallery />
       <BestFeatures />
+      <Gallery />
+      <GetInTouch />
     </div>
   );
 };

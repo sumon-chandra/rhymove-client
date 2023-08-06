@@ -55,7 +55,7 @@ const GalleryCard = () => {
         modules={[Grid, Navigation]}
         className="imgModalContainer lg:h-[500px] h-96"
       >
-        <div className="grid grid-cols-2">
+        <div className="">
           {carousels.map((slide) => (
             <SwiperSlide key={slide}>
               <label
@@ -105,7 +105,7 @@ const Gallery = () => {
           />
         </figure>
         {/* !!!!!!! Background Overlay !!!!!!! */}
-        <div className="absolute w-44 h-[60em] rotate-45 left-[50%] z-[1] bg-yellow-500 blur-[200px]"></div>
+        <div className="absolute lg:w-44 w-20 h-[60em] lg:rotate-45 left-[50%] z-[1] bg-yellow-500 blur-[200px]"></div>
       </div>
     </section>
   );

@@ -20,6 +20,14 @@
   .about-icon-container {
     @apply w-16 h-16 p-4 mx-auto duration-700 border-2 border-white rounded-full;
   }
+
+  /* !!!!!!!!!!!!!! Get in touch section !!!!!!!!!!! */
+  .contact-input {
+    @apply px-3 py-2 font-semibold text-black bg-transparent border rounded border-priColor focus:outline-priColor;
+  }
+  .my-btn {
+    @apply w-32 py-1 mx-auto font-bold text-white duration-700 border rounded-full cursor-pointer bg-priColor border-priColor hover:bg-transparent hover:text-priColor;
+  }
 }
 
 /* !!!!!!!!!!! My Custom Glass Background !!!!!!!!!!*/
