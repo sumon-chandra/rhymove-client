@@ -8,7 +8,8 @@ import AuthProvider from "./context-provider/AuthProvider.jsx";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+import "swiper/css/grid";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 AOS.init();
 import "aos/dist/aos.css";

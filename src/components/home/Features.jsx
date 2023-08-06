@@ -5,18 +5,26 @@ import { GiGuitar } from "react-icons/gi";
 
 const Features = () => {
   return (
-    <section className="section lg:grid grid-cols-2 items-center">
-      <div className="lg:-mr-20 hidden lg:block">
+    <section className="items-center grid-cols-2 section lg:grid">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="800"
+        className="hidden lg:-mr-20 lg:block"
+      >
         <img src={img} alt="" className="w-full" />
       </div>
-      <div>
+      <div data-aos="fade-up" data-aos-duration="1000">
         <h3 className="lg:pb-16 pb-5 lg:text-[6rem] leading-[7rem] text-2xl font-K2D font-bold lg:text-left text-center">
           Get Moving With Us
         </h3>
-        <div className="lg:space-y-24 space-y-20 relative">
-          <div className="lg:flex items-end gap-10 lg:relative lg:right-24">
-            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
+        <div className="relative space-y-20 lg:space-y-24">
+          <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            className="items-end gap-10 lg:flex lg:relative lg:right-24"
+          >
+            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl rounded-lg">
+              <div className="w-24 h-24 p-2 -mt-24 text-center bg-yellow-200 border-4 rounded-full text-7xl border-priColor">
                 <MdOutlineEventSeat />
               </div>
               <h4 className="my-3 text-2xl font-bold">Join Our Class</h4>
@@ -28,17 +36,21 @@ const Features = () => {
             <img
               src={arrow}
               alt=""
-              className="rotate-180 w-20 hidden lg:block"
+              className="hidden w-20 rotate-180 lg:block"
             />
           </div>
-          <div className="lg:flex items-end gap-10 lg:relative right-0">
+          <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            className="right-0 items-end gap-10 lg:flex lg:relative"
+          >
             <img
               src={arrow}
               alt=""
-              className="rotate-90 w-20 hidden lg:block"
+              className="hidden w-20 rotate-90 lg:block"
             />
-            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
+            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl rounded-lg">
+              <div className="w-24 h-24 p-2 -mt-24 text-center bg-yellow-200 border-4 rounded-full text-7xl border-priColor">
                 <GiGuitar />
               </div>
               <h4 className="my-3 text-2xl font-bold">Dance Choreography</h4>
@@ -48,9 +60,13 @@ const Features = () => {
               </p>
             </div>
           </div>
-          <div className="lg:flex items-end gap-10 lg:relative right-24">
-            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl">
-              <div className="-mt-24 p-2 text-7xl w-24 h-24 text-center bg-yellow-200 border-4 border-priColor rounded-full">
+          <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            className="items-end gap-10 lg:flex lg:relative right-24"
+          >
+            <div className="lg:w-[30rem] glass px-9 py-14 shadow-2xl rounded-lg">
+              <div className="w-24 h-24 p-2 -mt-24 text-center bg-yellow-200 border-4 rounded-full text-7xl border-priColor">
                 <MdOutlineSportsGymnastics />
               </div>
               <h4 className="my-3 text-2xl font-bold">Perform Onstage</h4>
