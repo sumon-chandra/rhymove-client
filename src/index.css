@@ -26,6 +26,9 @@
   .about-icon-container {
     @apply w-16 h-16 p-4 mx-auto duration-700 border-2 border-white rounded-full;
   }
+  .primary-icon {
+    @apply w-10 h-10 p-3 text-xs duration-700 bg-white border-2 border-white rounded-full;
+  }
 
   /* !!!!!!!!!!!!!! Get in touch section !!!!!!!!!!! */
   .contact-input {

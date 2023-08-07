@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
@@ -61,7 +62,7 @@ const ManageClassCard = ({ item, setClickedItem, refetch }) => {
       }
     >
       <figure>
-        <img src={item?.image} alt="" className="w-full h-60 object-cover" />
+        <img src={item?.image} alt="" className="object-cover w-full h-60" />
       </figure>
       <div className="card-body">
         <h3 className="card-title">{item?.name}</h3>
@@ -84,25 +85,25 @@ const ManageClassCard = ({ item, setClickedItem, refetch }) => {
           Price:
           <span className="font-bold"> ${item?.price}</span>
         </p>
-        <div className="flex justify-between gap-4 items-center pt-6">
+        <div className="flex items-center justify-between gap-4 pt-6">
           <button
             onClick={() => handleApproval(item)}
             disabled={item?.status === "denied" || item?.status === "approved"}
-            className="btn border-0 btn-sm rounded-none normal-case text-white bg-green-600 hover:bg-green-500"
+            className="text-white normal-case bg-green-600 border-0 rounded-none btn btn-sm hover:bg-green-500"
           >
             Approve
           </button>
           <button
             onClick={() => handleDenied(item)}
             disabled={item?.status === "denied" || item?.status === "approved"}
-            className="btn border-0 btn-sm rounded-none normal-case text-white bg-red-600 hover:bg-red-500"
+            className="text-white normal-case bg-red-600 border-0 rounded-none btn btn-sm hover:bg-red-500"
           >
             Deny
           </button>
           <label
             htmlFor="feedbackModal"
             onClick={() => setClickedItem(item)}
-            className="btn border-0 btn-sm rounded-none normal-case text-white bg-priColor hover:bg-secColor"
+            className="text-white normal-case border-0 rounded-none btn btn-sm bg-priColor hover:bg-secColor"
           >
             Feedback
           </label>
@@ -165,8 +166,10 @@ const ManageClasses = () => {
         <SectionTitle value="Manage All Classes!" />
         {classes?.length === 0 ? (
           <EmptyFile />
+        ) : isLoading ? (
+          <PropagateLoader color="#FFA500" size={30} />
         ) : (
-          <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
+          <div className="grid-cols-3 lg:grid gap-x-10 gap-y-20">
             {classes.map((item) => (
               <ManageClassCard
                 key={item?._id}
@@ -183,25 +186,25 @@ const ManageClasses = () => {
       <input type="checkbox" id="feedbackModal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg text-center py-2">
+          <h3 className="py-2 text-lg font-bold text-center">
             {clickedItem?.name}!
           </h3>
           <form onSubmit={handleSubmit(handleSubmitFeedback)}>
             <textarea
               placeholder="Write your feedback"
               {...register("feedback", { required: true })}
-              className="textarea textarea-bordered textarea-sm w-full"
+              className="w-full textarea textarea-bordered textarea-sm"
             />
             <input
               type="submit"
               value="Submit"
-              className="btn btn-sm bg-priColor hover:bg-secColor mt-4 normal-case text-white"
+              className="mt-4 text-white normal-case btn btn-sm bg-priColor hover:bg-secColor"
             />
           </form>
           <div className="modal-action">
             <label
               htmlFor="feedbackModal"
-              className="btn btn-sm btn-neutral h-8 w-8 rounded-full"
+              className="w-8 h-8 rounded-full btn btn-sm btn-neutral"
             >
               X
             </label>

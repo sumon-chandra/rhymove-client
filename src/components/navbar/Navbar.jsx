@@ -141,7 +141,9 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="text-3xl text-black cursor-pointer select-none font-K2D">
-            <h3 className="font-black uppercase">Rhymove</h3>
+            <Link to="/" className="font-black uppercase">
+              Rhymove
+            </Link>
           </div>
         </div>
         <div className="hidden navbar-center lg:flex">

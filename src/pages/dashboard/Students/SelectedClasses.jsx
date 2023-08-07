@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import SectionTitle from "../../../components/sections/SectionTitle";
 import ClassCard from "../../../components/cards/ClassCard";
 import PaymentModal from "../../../components/PaymentModal";
@@ -11,7 +12,11 @@ const SelectedClasses = () => {
   const [axiosSecure] = useAxiosSecure();
   const { user } = useAuth();
   const [selectedItemToPay, setSelectedItemToPay] = useState({});
-  const { data: classes = [], refetch } = useQuery({
+  const {
+    data: classes = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["selected-class"],
     enabled: !!user?.email,
     queryFn: async () => {
@@ -28,12 +33,14 @@ const SelectedClasses = () => {
       <Helmet>
         <title>My Selected Class - Rhymove Dance Studio & School</title>
       </Helmet>
-      <section className="section lg:pb-32 pb-10">
+      <section className="pb-10 section lg:pb-32">
         <SectionTitle value="My Selected Classes!" />
         {filteredClasses.length === 0 ? (
           <EmptyFile />
+        ) : isLoading ? (
+          <PropagateLoader color="#FFA500" size={30} />
         ) : (
-          <div className="lg:grid grid-cols-3 gap-x-10 gap-y-20">
+          <div className="grid-cols-3 lg:grid gap-x-10 gap-y-20">
             {filteredClasses?.map((item) => (
               <ClassCard
                 item={item}

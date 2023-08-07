@@ -1,9 +1,9 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { FaGoogle, FaImages, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaGoogle, FaImages } from "react-icons/fa";
 import loginImg from "../assets/img-2.png";
 import { AuthContext } from "../context-provider/AuthProvider";
 import axios from "axios";

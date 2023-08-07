@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
@@ -7,10 +8,16 @@ import { FaTrash, FaUserShield } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import EmptyFile from "../../../components/sections/EmptyFile";
+import useAuth from "../../../hooks/useAuth";
 
 const ManageUser = () => {
   const [axiosSecure] = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery({
+  const { user } = useAuth();
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["users"],
     enabled: !!localStorage.getItem("JWT"),
     queryFn: async () => {
@@ -92,23 +99,25 @@ const ManageUser = () => {
         <SectionTitle value="Manage All Users!" />
         {users?.length === 0 ? (
           <EmptyFile />
+        ) : isLoading ? (
+          <PropagateLoader color="#FFA500" size={30} />
         ) : (
           <div className="w-full">
-            <div className="uppercase font-cinzel lg:text-2xl text-xs font-bold p-3">
+            <div className="p-3 text-xs font-bold uppercase font-cinzel lg:text-2xl">
               <h4>
                 Total User:{" "}
                 {users.length < 9 ? `0${users.length}` : users.length}
               </h4>
             </div>
             <div className="overflow-x-auto">
-              <table className="table table-zebra w-full border table-pin-rows table-pin-cols lg:text-lg text-xs">
+              <table className="table w-full text-xs border table-zebra table-pin-rows table-pin-cols lg:text-lg">
                 <thead>
                   <tr>
                     <th className="lg:text-xl">#</th>
                     <th className="lg:text-xl">Name</th>
                     <th className="lg:text-xl">Email</th>
                     <th className="lg:text-xl">Rule</th>
-                    <th className="lg:text-xl">Actions</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -116,25 +125,25 @@ const ManageUser = () => {
                     <tr key={user._id} className="font-bold">
                       <th>{index + 1}</th>
                       <td>{user.name}</td>
-                      <td>{user.email}</td>
+                      <td className="text-sm">{user.email}</td>
                       <td>
                         {user?.rule === "admin" ? (
-                          "Admin"
+                          <span className="text-sm">Admin</span>
                         ) : (
                           <div className="flex gap-2 ">
                             <button
                               disabled={user?.rule === "instructor"}
-                              data-tip="Make Instructor"
+                              title="Make Instructor"
                               onClick={() => handleMakeInstructor(user)}
-                              className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
+                              className="text-white primary-icon bg-slate-400 disabled:opacity-40"
                             >
                               <GiTeacher />
                             </button>
 
                             <button
-                              data-tip="Make Admin"
+                              title="Make Admin"
                               onClick={() => handleMakeAdmin(user)}
-                              className="tooltip normal-case text-xl btn btn-ghost bg-priColor btn-xs w-10 h-10 text-white hover:bg-secColor"
+                              className="text-white primary-icon bg-priColor"
                             >
                               <FaUserShield />
                             </button>
@@ -144,7 +153,8 @@ const ManageUser = () => {
                       <td>
                         <button
                           onClick={() => handleDelete(user)}
-                          className="btn btn-ghost bg-red-600 btn-xs w-10 h-10 text-xl text-white hover:bg-red-500"
+                          title="Delete User"
+                          className="text-white bg-red-500 primary-icon"
                         >
                           <FaTrash />
                         </button>
